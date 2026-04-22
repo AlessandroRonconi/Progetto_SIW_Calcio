@@ -1,5 +1,6 @@
 package it.uniroma3.siw.football.model;
 
+import it.uniroma3.siw.football.model.enums.UserRole;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

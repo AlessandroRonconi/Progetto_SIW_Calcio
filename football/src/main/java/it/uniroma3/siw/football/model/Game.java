@@ -2,6 +2,7 @@ package it.uniroma3.siw.football.model;
 
 import java.time.LocalDateTime;
 
+import it.uniroma3.siw.football.model.enums.GameStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
