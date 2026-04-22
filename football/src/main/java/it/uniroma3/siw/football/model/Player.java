@@ -2,26 +2,34 @@ package it.uniroma3.siw.football.model;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "players")
 public class Player {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(nullable = false)
     private String firstName;
+    @Column(nullable = false)
     private String lastName;
+    @Column(name = "date_of_birth", nullable = false)
     private LocalDateTime dateOfBirth;
+    @Column(nullable = false)
     private String role;
+    @Column(nullable = false)
     private Float height;
 
-    @OneToOne
-    Team team;
+    @ManyToOne
+    private Team team;
 
     public Long getId() {
         return id;

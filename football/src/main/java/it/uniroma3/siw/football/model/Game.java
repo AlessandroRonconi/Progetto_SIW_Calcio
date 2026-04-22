@@ -2,24 +2,36 @@ package it.uniroma3.siw.football.model;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "games")
 public class Game {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "date_time", nullable = false)
     private LocalDateTime dateTime;
+    @Column(nullable = false)
     private String place;
+    @Column(name = "goals_home")
     private Integer goalsHome;
+    @Column(name = "goals_away")
     private Integer goalsAway;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private GameStatus status;
+
     @ManyToOne
     private Tournament tournament;
     @ManyToOne
