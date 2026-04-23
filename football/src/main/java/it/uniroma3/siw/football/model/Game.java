@@ -1,6 +1,7 @@
 package it.uniroma3.siw.football.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import it.uniroma3.siw.football.model.enums.GameStatus;
 import jakarta.persistence.Column;
@@ -11,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -41,6 +43,8 @@ public class Game {
     private Team awayTeam;
     @ManyToOne
     private Referee referee;
+    @OneToMany
+    private List<GameComment> comments;
 
     public Long getId() {
         return id;
@@ -120,6 +124,14 @@ public class Game {
 
     public void setReferee(Referee referee) {
         this.referee = referee;
+    }
+
+    public List<GameComment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<GameComment> comments) {
+        this.comments = comments;
     }
 
 }
