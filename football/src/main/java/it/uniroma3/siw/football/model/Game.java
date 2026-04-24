@@ -44,7 +44,7 @@ public class Game {
     @ManyToOne
     private Referee referee;
     @OneToMany
-    private List<GameComment> comments;
+    private List<Comment> comments;
 
     public Long getId() {
         return id;
@@ -126,11 +126,11 @@ public class Game {
         this.referee = referee;
     }
 
-    public List<GameComment> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(List<GameComment> comments) {
+    public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
 

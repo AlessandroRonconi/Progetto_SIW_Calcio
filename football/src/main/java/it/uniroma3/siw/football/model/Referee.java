@@ -25,7 +25,7 @@ public class Referee {
     private Long code;
     
     @OneToMany(mappedBy = "referee")
-    List<Game> games;
+    private List<Game> games;
 
     public Long getId() {
         return id;
