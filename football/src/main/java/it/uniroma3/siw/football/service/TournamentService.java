@@ -1,22 +1,28 @@
 package it.uniroma3.siw.football.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.uniroma3.siw.football.exception.TournamentNotFoundException;
 import it.uniroma3.siw.football.model.Tournament;
 import it.uniroma3.siw.football.repository.TournamentRepository;
 
 @Service
 public class TournamentService {
-    @Autowired
     private TournamentRepository tournamentRepository;
+
+    public TournamentService(TournamentRepository tournamentRepository) {
+        this.tournamentRepository = tournamentRepository;
+    }
 
     @Transactional(readOnly = true)
     public List<Tournament> findAll() {
-        return (List<Tournament>) this.tournamentRepository.findAll();
+        List<Tournament> list = new ArrayList<>();
+        this.tournamentRepository.findAll().forEach(list::add);
+        return list;
     }
 
     @Transactional
@@ -26,7 +32,8 @@ public class TournamentService {
 
     @Transactional(readOnly = true)
     public Tournament findById(Long id) {
-        return this.tournamentRepository.findById(id);
+        return this.tournamentRepository.findById(id)
+                .orElseThrow(() -> new TournamentNotFoundException(id));
     }
 
     @Transactional
