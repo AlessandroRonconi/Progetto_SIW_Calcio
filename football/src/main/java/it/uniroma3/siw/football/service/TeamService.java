@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.uniroma3.siw.football.exception.TeamNotFoundException;
 import it.uniroma3.siw.football.model.Team;
 import it.uniroma3.siw.football.repository.TeamRepository;
 
@@ -27,6 +28,11 @@ public class TeamService {
     @Transactional
     public Team save(Team t) {
         return this.teamRepository.save(t);
+    }
+
+    @Transactional
+    public Team findById(Long id) {
+        return this.teamRepository.findById(id).orElseThrow(()->new TeamNotFoundException(id));
     }
 
 }
