@@ -1,7 +1,12 @@
 package it.uniroma3.siw.football.model;
 
+import java.util.List;
+
+import it.uniroma3.siw.football.model.enums.UserRole;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -13,16 +18,16 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @NotBlank
-    private String name;
-
-    @NotBlank
-    private String surname;
-
-    @NotBlank
     @Column(nullable = false, unique = true)
-    private String email;
+    private String username;
+    @Column(nullable = false)
+    private String password;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private UserRole role;
+
+    @OneToMany(mappedBy="author")
+    private List<Comment> comments;
 
     public Long getId() {
         return id;
@@ -32,44 +37,35 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getPassword() {
+        return password;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public UserRole getRole() {
+        return role;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || this.getClass() != o.getClass())
-            return false;
-        User other = (User) o;
-        return this.name != null && this.name.equals(other.name) ||
-                this.surname != null && this.surname.equals(other.surname) ||
-                this.email != null && this.email.equals(other.email);
+    public List<Comment> getComments() {
+        return comments;
     }
 
-    @Override
-    public int hashCode() {
-        return name.hashCode() + surname.hashCode() + email.hashCode();
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }
