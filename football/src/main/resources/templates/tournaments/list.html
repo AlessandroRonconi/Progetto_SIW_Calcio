@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tornei</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <h1 th:text="'Lista dei tornei (' + ${number} + ')'">Lista dei tornei</h1>
+    <div>
+        <ul>
+            <li th:each="tournament : ${tournaments}">
+                <a th:href="@{'/tournaments/' + ${tournament.id}}" th:text="${tournament.name}">
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>

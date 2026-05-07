@@ -20,9 +20,10 @@ public class TournamentController {
         this.gameService = gameService;
     }
 
-    @GetMapping("/tournaments/list")
+    @GetMapping("/tournaments")
     public String getTournamentList(Model model) {
         model.addAttribute("tournaments", this.tournamentService.findAll());
+        model.addAttribute("number", this.tournamentService.count());
         return "list.html";
     }
 

@@ -10,10 +10,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tournaments")
 public class Tournament {
 
     @Id

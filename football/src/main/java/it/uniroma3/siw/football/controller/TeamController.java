@@ -18,17 +18,16 @@ public class TeamController {
         this.teamService = teamService;
     }
 
-    @GetMapping("/teams/list")
+    @GetMapping("/list")
     public String getTeamsList(Model model) {
         model.addAttribute("teams", this.teamService.findAll());
         return "list.html";
     }
 
-    @GetMapping("/teams/{id}")
+    @GetMapping("/{id}")
     public String getTeamDetail(@PathVariable Long id, Model model) {
         Team t = this.teamService.findById(id);
         model.addAttribute("team", t);
         return "team.html";
     }
-
 }

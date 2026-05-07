@@ -46,10 +46,16 @@ public class SecurityConfiguration {
             authorize.requestMatchers(HttpMethod.GET, "/", "/index", "/register", "/css/**", "/images/**",
                     "/favicon.ico").permitAll();
             authorize.requestMatchers(HttpMethod.POST, "/register", "/login").permitAll();
+            
             // funzionalità pubbliche
-            authorize.requestMatchers(HttpMethod.GET, "/tournaments", "/tournaments/{id}",
-                    "/tournaments/{id}/teams", "/teams/{id}", "/tournaments/{id}/calendar").permitAll();
+            authorize.requestMatchers(HttpMethod.GET, "/tournaments", "/tournaments/*",
+                    "/tournaments/*/participants", "/teams/*", "/tournaments/*/calendar").permitAll();
+            
             // funzionalità da utente registrato
+            authorize.requestMatchers(HttpMethod.GET,
+                    "/games/*/comments", "/comments/*/edit").authenticated();
+            authorize.requestMatchers(HttpMethod.POST,
+                    "/games/*/comments", "/comments/*/edit").authenticated();
 
             // funzionalità da amministratore
             authorize.requestMatchers(HttpMethod.GET, "/admin/**").hasAnyAuthority(ADMIN_ROLE);

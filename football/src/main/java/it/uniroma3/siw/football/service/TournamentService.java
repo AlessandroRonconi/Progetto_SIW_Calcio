@@ -41,4 +41,8 @@ public class TournamentService {
         tournamentRepository.deleteById(id);
     }
 
+    public Long count() {
+        return this.tournamentRepository.count();
+    }
+
 }

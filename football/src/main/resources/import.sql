@@ -1,0 +1,3 @@
+INSERT INTO tournament(id, name, year, description) VALUES (nextval('tournament_seq'), "Under 21 2026", 2026, "Torneo amatoriale per gli under 21.")
+INSERT INTO tournament(id, name, year, description) VALUES (nextval('tournament_seq'), "Under 21 2025", 2025, "Torneo amatoriale per gli under 21.")
+INSERT INTO tournament(id, name, year, description) VALUES (nextval('tournament_seq'), "Under 30 2026", 2026, "Torneo amatoriale per gli under 30.")

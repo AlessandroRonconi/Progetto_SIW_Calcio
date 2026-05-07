@@ -20,14 +20,14 @@ public class GlobalExceptionHandler {
         return "error/404";
     }
 
-    @ExceptionHandler(TournamentNotFoundException.class)
+    @ExceptionHandler(GameNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String handleGameNotFound(GameNotFoundException e, Model model) {
         model.addAttribute("errorMessage", e.getMessage());
         return "error/404";
     }
 
-    @ExceptionHandler(TournamentNotFoundException.class)
+    @ExceptionHandler(UserNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String handleUserNotFound(UserNotFoundException e, Model model) {
         model.addAttribute("errorMessage", e.getMessage());
