@@ -21,13 +21,13 @@ public class TeamController {
     @GetMapping("/list")
     public String getTeamsList(Model model) {
         model.addAttribute("teams", this.teamService.findAll());
-        return "list.html";
+        return "/teams/list.html";
     }
 
     @GetMapping("/{id}")
     public String getTeamDetail(@PathVariable Long id, Model model) {
         Team t = this.teamService.findById(id);
         model.addAttribute("team", t);
-        return "team.html";
+        return "/teams/team.html";
     }
 }

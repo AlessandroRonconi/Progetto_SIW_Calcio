@@ -24,13 +24,13 @@ public class TournamentController {
     public String getTournamentList(Model model) {
         model.addAttribute("tournaments", this.tournamentService.findAll());
         model.addAttribute("number", this.tournamentService.count());
-        return "list.html";
+        return "/tournaments/list.html";
     }
 
     @GetMapping("/tournaments/{id}")
     public String getTournamentDetail(@PathVariable Long id, Model model) {
         model.addAttribute("tournament", this.tournamentService.findById(id));
-        return "tournament.html";
+        return "/tournaments/tournament.html";
     }
 
     @GetMapping("/tournaments/{id}/participants")
@@ -38,14 +38,14 @@ public class TournamentController {
         Tournament t = this.tournamentService.findById(id);
         model.addAttribute("tournament", t);
         model.addAttribute("participants", t.getTeams());
-        return "participants.html";
+        return "/tournaments/participants.html";
     }
 
     @GetMapping("/tournaments/{id}/calendar")
     public String getCalendar(@PathVariable Long id, Model model) {
         model.addAttribute("tournament", this.tournamentService.findById(id));
         model.addAttribute("games", this.gameService.gamesByTournament(id));
-        return "calendar.html";
+        return "/tournaments/calendar.html";
     }
 
 }
