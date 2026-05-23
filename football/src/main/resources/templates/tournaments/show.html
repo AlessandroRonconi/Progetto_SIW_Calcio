@@ -14,6 +14,15 @@
     <div>
         Descrizione: <span th:text="${tournament.description}">sotto la panca</span>
     </div>
+    <h2>
+        <a th:href="@{'/tournaments/' + ${tournament.id} + '/participants'}">Lista delle squadre partecipanti</a>
+    </h2>
+    <h2>
+        <a th:href="@{'/tournaments/' + ${tournament.id} + '/calendar'}">Calendario delle partite</a>
+    </h2>
+    <h2>
+        <a th:href="@{'/tournaments/' + ${tournament.id} + '/classification'}">Classifica del torneo</a>
+    </h2>
 </body>
 
 </html>

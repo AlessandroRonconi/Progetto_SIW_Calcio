@@ -48,4 +48,12 @@ public class TournamentController {
         return "/tournaments/calendar.html";
     }
 
+    @GetMapping("/tournaments/{id}/classification")
+    public String getClassification(@PathVariable Long id, Model model) {
+        Tournament t = this.tournamentService.findById(id);
+        model.addAttribute("tournament", t);
+        model.addAttribute("participants", t.getTeams());
+        return "/tournaments/classification.html";
+    }
+
 }
