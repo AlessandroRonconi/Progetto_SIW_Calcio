@@ -28,6 +28,6 @@ public class TeamController {
     public String getTeamDetail(@PathVariable Long id, Model model) {
         Team t = this.teamService.findById(id);
         model.addAttribute("team", t);
-        return "/teams/team.html";
+        return "/teams/show.html";
     }
 }

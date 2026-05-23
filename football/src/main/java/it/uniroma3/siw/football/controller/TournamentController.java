@@ -30,7 +30,7 @@ public class TournamentController {
     @GetMapping("/tournaments/{id}")
     public String getTournamentDetail(@PathVariable Long id, Model model) {
         model.addAttribute("tournament", this.tournamentService.findById(id));
-        return "/tournaments/tournament.html";
+        return "/tournaments/show.html";
     }
 
     @GetMapping("/tournaments/{id}/participants")

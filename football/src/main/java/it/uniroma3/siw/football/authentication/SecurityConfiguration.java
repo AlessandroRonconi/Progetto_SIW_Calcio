@@ -40,8 +40,17 @@ public class SecurityConfiguration {
     protected SecurityFilterChain configure(final HttpSecurity httpSecurity) throws Exception {
 
         httpSecurity.authorizeHttpRequests(authorize -> {
-            authorize.requestMatchers(HttpMethod.GET, "/", "/index", "/register", "/css/**", "/tournaments", "/tournaments/list", "/tournaments/tournament", "/teams", "/teams/list", "/teams/team").permitAll();
+            authorize.requestMatchers(HttpMethod.GET, "/", "/index", "/register", "login", "/css/**").permitAll();
             authorize.requestMatchers(HttpMethod.POST, "/register", "/login").permitAll();
+
+            authorize.requestMatchers(HttpMethod.GET, "/tournaments", "/tournaments/{id}", "/tournaments/{id}/participants", "/tournaments/{id}/calendar", "/tournaments/{id}/classification").permitAll();
+            authorize.requestMatchers(HttpMethod.GET, "/teams", "/teams/{id}").permitAll();
+
+            authorize.requestMatchers(HttpMethod.GET, "/games/{id}/comments").authenticated();
+            authorize.requestMatchers(HttpMethod.POST, "/games/{id}/comments").authenticated();
+            authorize.requestMatchers(HttpMethod.GET, "/comments/{id}/edit").authenticated();
+            authorize.requestMatchers(HttpMethod.POST, "/comments/{id}/edit").authenticated();
+
             authorize.requestMatchers(HttpMethod.GET, "/admin/**").hasAnyAuthority("ADMIN");
             authorize.requestMatchers(HttpMethod.POST, "/admin/**").hasAnyAuthority("ADMIN");
             authorize.anyRequest().authenticated();
