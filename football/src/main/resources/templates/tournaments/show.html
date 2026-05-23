@@ -7,7 +7,13 @@
 </head>
 
 <body>
-    <h1 th:text="${tournament.name}"></h1>
+    <h1 th:text="${tournament.name}">Genitori contro Figli</h1>
+    <div>
+        Anno: <span th:text="${tournament.year}">2001</span>
+    </div>
+    <div>
+        Descrizione: <span th:text="${tournament.description}">sotto la panca</span>
+    </div>
 </body>
 
 </html>

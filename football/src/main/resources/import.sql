@@ -1,4 +1,4 @@
 INSERT INTO tournament(id, name, year, description) VALUES (nextval('tournament_seq'), 'Under 21 2026', 2026, 'Torneo amatoriale per gli under 21.');
 INSERT INTO tournament(id, name, year, description) VALUES (nextval('tournament_seq'), 'Under 21 2025', 2025, 'Torneo amatoriale per gli under 21.');
-INSERT INTO tournament(id, name, year, description) VALUES (nextval('tournament_seq'), 'Under 30 2026', 2026, 'Torneo amatoriale per gli under 30.');
+INSERT INTO tournament(id, name, year, description) VALUES (nextval('tournament_seq'), 'Under 18 2026', 2026, 'Torneo amatoriale per gli under 18.');
 insert into credentials (id, username, password, role) values(nextval('credentials_seq'), 'paolo', '$2a$10$yWAIDyuEr78BBBFZ5cYh8.Nw4gUHFTRG5FwaWqNCGeOD8M4mh3.xy', 'ADMIN');
