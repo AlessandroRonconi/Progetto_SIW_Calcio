@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title th:text="${tournament.name} + ' - Partecipanti'">Partecipanti</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <h1 th:text="'Lista delle squadre che partecipano al torneo ' + ${tournament.name} + ' (' + ${number} + ')'">Lista
+        dei partecipanti</h1>
+    <div>
+        <ul>
+            <li th:each="team : ${participants}">
+                <a th:href="@{'/teams/' + ${team.id}}" th:text="${team.name}">
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>

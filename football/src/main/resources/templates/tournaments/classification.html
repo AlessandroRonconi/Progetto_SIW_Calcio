@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${tournament.name} + ' - Classifica'">Classifica</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+    <h1 th:text="'Classifica ' + ${tournament.name} + ' (' + ${tournament.year} + ')'">Classifica Torneo</h1>
+
+    <p th:if="${#lists.isEmpty(classificationRows)}">Nessuna squadra partecipante o nessun dato disponibile.</p>
+
+    <table th:unless="${#lists.isEmpty(classificationRows)}">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Squadra</th>
+                <th>PG</th>
+                <th>V</th>
+                <th>P</th>
+                <th>S</th>
+                <th>GF</th>
+                <th>GS</th>
+                <th>DR</th>
+                <th>Pts</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="row, iterStat : ${classificationRows}">
+                <td th:text="${iterStat.count}">1</td>
+                <td>
+                    <a th:href="@{/teams/{id}(id=${row.teamId})}" th:text="${row.teamName}">Squadra</a>
+                </td>
+                <td th:text="${row.playedGames}">0</td>
+                <td th:text="${row.wins}">0</td>
+                <td th:text="${row.draws}">0</td>
+                <td th:text="${row.losses}">0</td>
+                <td th:text="${row.goalsFor}">0</td>
+                <td th:text="${row.goalsAgainst}">0</td>
+                <td th:text="${row.goalsDifference}">0</td>
+                <td th:text="${row.points}">0</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p><small><b>PG</b> = Partite giocate &nbsp;|&nbsp; <b>V</b> = Vittorie &nbsp;|&nbsp; <b>P</b> = Pareggi &nbsp;|&nbsp; <b>S</b> = Sconfitte
+            &nbsp;|&nbsp; <b>GF</b> = Gol fatti &nbsp;|&nbsp; <b>GS</b> = Gol subiti &nbsp;|&nbsp; <b>DR</b> = Differenza reti &nbsp;|&nbsp;
+            <b>Pts</b> = Punti</small></p>
+
+</body>
+</html>

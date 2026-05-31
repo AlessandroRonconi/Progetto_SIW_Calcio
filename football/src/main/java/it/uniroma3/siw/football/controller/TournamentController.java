@@ -38,6 +38,7 @@ public class TournamentController {
         Tournament t = this.tournamentService.findById(id);
         model.addAttribute("tournament", t);
         model.addAttribute("participants", t.getTeams());
+        model.addAttribute("number", t.getTeams().size());
         return "/tournaments/participants.html";
     }
 
@@ -50,10 +51,10 @@ public class TournamentController {
 
     @GetMapping("/tournaments/{id}/classification")
     public String getClassification(@PathVariable Long id, Model model) {
-        Tournament t = this.tournamentService.findById(id);
-        model.addAttribute("tournament", t);
-        model.addAttribute("participants", t.getTeams());
-        return "/tournaments/classification.html";
+        model.addAttribute("tournament", this.tournamentService.findById(id));
+        model.addAttribute("classificationRows", this.tournamentService.getClassificationTable(id));
+
+        return "tournaments/classification.html";
     }
 
 }
