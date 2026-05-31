@@ -15,7 +15,7 @@ import it.uniroma3.siw.football.repository.TournamentRepository;
 
 @Service
 public class TournamentService {
-    private final GameRepository gameRepository;
+    private GameRepository gameRepository;
     private TournamentRepository tournamentRepository;
     
     public TournamentService(TournamentRepository tournamentRepository, GameRepository gameRepository) {
