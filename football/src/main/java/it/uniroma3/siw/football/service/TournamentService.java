@@ -46,6 +46,7 @@ public class TournamentService {
         tournamentRepository.deleteById(id);
     }
 
+    @Transactional
     public Long count() {
         return this.tournamentRepository.count();
     }

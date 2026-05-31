@@ -20,6 +20,11 @@ public class GameService {
     }
 
     @Transactional
+    public Game findById(Long id){
+        return this.gameRepository.findById(id).get();
+    }
+
+    @Transactional
     public Game save(Game game) {
         return this.gameRepository.save(game);
     }

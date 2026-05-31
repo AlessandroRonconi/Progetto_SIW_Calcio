@@ -11,22 +11,27 @@ public class CommentService {
 
     private CommentRepository commentRepository;
 
-    public CommentService(CommentRepository commentRepository){
-        this.commentRepository=commentRepository;
+    public CommentService(CommentRepository commentRepository) {
+        this.commentRepository = commentRepository;
     }
 
     @Transactional
-    public Comment save(Comment c){
+    public Comment save(Comment c) {
         return this.commentRepository.save(c);
     }
 
-    @Transactional(readOnly=true)
-    public List<Comment> findByGame(Long gId){
+    @Transactional(readOnly = true)
+    public List<Comment> findByGame(Long gId) {
         return this.commentRepository.findByGameId(gId);
     }
 
     @Transactional
-    public Comment update(Comment c){
+    public Comment update(Comment c) {
         return this.commentRepository.save(c);
+    }
+
+    @Transactional
+    public Comment findById(Long id) {
+        return this.commentRepository.findById(id).get();
     }
 }
