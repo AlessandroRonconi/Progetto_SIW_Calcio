@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Referee {
+public class Arbitro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,8 +22,8 @@ public class Referee {
     @Column(nullable = false, unique = true)
     private Long code;
     
-    @OneToMany(mappedBy = "referee")
-    private List<Game> games;
+    @OneToMany(mappedBy = "arbitro")
+    private List<Partita> partite;
 
     public Long getId() {
         return id;
@@ -57,11 +57,11 @@ public class Referee {
         this.code = code;
     }
 
-    public List<Game> getGames() {
-        return games;
+    public List<Partita> getPartite() {
+        return partite;
     }
 
-    public void setGames(List<Game> games) {
-        this.games = games;
+    public void setPartite(List<Partita> partite) {
+        this.partite = partite;
     }
 }

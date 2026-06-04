@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Comment {
+public class Commento {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -23,7 +23,7 @@ public class Comment {
     @ManyToOne
     private User author;
     @ManyToOne
-    private Game game;
+    private Partita partita;
 
     public Long getId() {
         return id;
@@ -49,12 +49,12 @@ public class Comment {
         this.dateTime = dateTime;
     }
 
-    public Game getGame() {
-        return game;
+    public Partita getPartita() {
+        return partita;
     }
 
-    public void setGame(Game game) {
-        this.game = game;
+    public void setPartita(Partita partita) {
+        this.partita = partita;
     }
 
     public User getAuthor() {

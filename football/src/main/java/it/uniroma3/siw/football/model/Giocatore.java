@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Player {
+public class Giocatore {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,7 +27,7 @@ public class Player {
     private Float height;
 
     @ManyToOne
-    private Team team;
+    private Squadra squadra;
 
     public Long getId() {
         return id;
@@ -77,11 +77,11 @@ public class Player {
         this.height = height;
     }
 
-    public Team getTeam() {
-        return team;
+    public Squadra getSquadra() {
+        return squadra;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setSquadra(Squadra squadra) {
+        this.squadra = squadra;
     }
 }

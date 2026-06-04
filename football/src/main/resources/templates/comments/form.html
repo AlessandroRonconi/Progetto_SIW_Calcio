@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Nuovo commento</title>
+    <link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+
+    <h1>Aggiungi un commento</h1>
+    <form th:action="@{'/games/' + ${game.id} + '/comments/new'}" method="POST" th:object="${comment}">
+
+        <div>
+            Testo: <span><input required type="text" th:field="*{text}" /></span>
+            <span th:if="${#fields.hasErrors('text')}" th:errors="*{text}" class="error-message"></span>
+        </div>
+
+        <span><button type="submit">Conferma</button></span>
+
+    </form>
+</body>
+
+</html>

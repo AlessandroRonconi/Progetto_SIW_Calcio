@@ -8,7 +8,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
-
 @Entity
 @Table(name = "users")
 public class User {
@@ -21,7 +20,7 @@ public class User {
     private String surname;
     @NotBlank
     @Column(nullable = false, unique = true)
-    private String email;
+    private String username;
 
     public User() {
     }
@@ -50,12 +49,12 @@ public class User {
         this.surname = surname;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override
@@ -67,12 +66,12 @@ public class User {
         User other = (User) o;
         return this.name != null && this.name.equals(other.name) ||
                 this.surname != null && this.surname.equals(other.surname) ||
-                this.email != null && this.email.equals(other.email);
+                this.username != null && this.username.equals(other.username);
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode() + surname.hashCode() + email.hashCode();
+        return name.hashCode() + surname.hashCode() + username.hashCode();
     }
 
 }

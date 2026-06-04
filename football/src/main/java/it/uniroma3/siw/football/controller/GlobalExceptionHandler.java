@@ -6,30 +6,14 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import it.uniroma3.siw.football.exception.GameNotFoundException;
-import it.uniroma3.siw.football.exception.TournamentNotFoundException;
-import it.uniroma3.siw.football.exception.UserNotFoundException;
+import it.uniroma3.siw.football.exception.ResourceNotFoundException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(TournamentNotFoundException.class)
+    @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String handleTournamentNotFound(TournamentNotFoundException e, Model model) {
-        model.addAttribute("errorMessage", e.getMessage());
-        return "error/404";
-    }
-
-    @ExceptionHandler(GameNotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String handleGameNotFound(GameNotFoundException e, Model model) {
-        model.addAttribute("errorMessage", e.getMessage());
-        return "error/404";
-    }
-
-    @ExceptionHandler(UserNotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String handleUserNotFound(UserNotFoundException e, Model model) {
+    public String handleResourceNotFound(ResourceNotFoundException e, Model model) {
         model.addAttribute("errorMessage", e.getMessage());
         return "error/404";
     }

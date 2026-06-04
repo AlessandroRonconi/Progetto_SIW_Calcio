@@ -12,7 +12,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Team {
+public class Squadra {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,9 +25,9 @@ public class Team {
     private String city;
 
     @ManyToMany
-    private List<Tournament> tournaments;
-    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
-    private List<Player> players;
+    private List<Torneo> tornei;
+    @OneToMany(mappedBy = "squadra", cascade = CascadeType.ALL)
+    private List<Giocatore> giocatori;
 
     public Long getId() {
         return id;
@@ -61,19 +61,19 @@ public class Team {
         this.city = city;
     }
 
-    public List<Tournament> getTournaments() {
-        return tournaments;
+    public List<Torneo> getTornei() {
+        return tornei;
     }
 
-    public void setTournaments(List<Tournament> tournaments) {
-        this.tournaments = tournaments;
+    public void setTornei(List<Torneo> tornei) {
+        this.tornei = tornei;
     }
 
-    public List<Player> getPlayers() {
-        return players;
+    public List<Giocatore> getGiocatori() {
+        return giocatori;
     }
 
-    public void setPlayers(List<Player> players) {
-        this.players = players;
+    public void setGiocatori(List<Giocatore> giocatori) {
+        this.giocatori = giocatori;
     }
 }

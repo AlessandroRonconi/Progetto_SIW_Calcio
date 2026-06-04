@@ -3,7 +3,7 @@ package it.uniroma3.siw.football.model;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import it.uniroma3.siw.football.model.enums.GameStatus;
+import it.uniroma3.siw.football.model.enums.PartitaStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -15,7 +15,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Game {
+public class Partita {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,18 +31,18 @@ public class Game {
     private Integer goalsAway;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private GameStatus status;
+    private PartitaStatus status;
 
     @ManyToOne
-    private Tournament tournament;
+    private Torneo tournament;
     @ManyToOne
-    private Team homeTeam;
+    private Squadra homeTeam;
     @ManyToOne
-    private Team awayTeam;
+    private Squadra awayTeam;
     @ManyToOne
-    private Referee referee;
+    private Arbitro arbitro;
     @OneToMany
-    private List<Comment> comments;
+    private List<Commento> commenti;
 
     public Long getId() {
         return id;
@@ -84,52 +84,52 @@ public class Game {
         this.goalsAway = goalsAway;
     }
 
-    public GameStatus getStatus() {
+    public PartitaStatus getStatus() {
         return status;
     }
 
-    public void setStatus(GameStatus status) {
+    public void setStatus(PartitaStatus status) {
         this.status = status;
     }
 
-    public Tournament getTournament() {
+    public Torneo getTorneo() {
         return tournament;
     }
 
-    public void setTournament(Tournament tournament) {
+    public void setTorneo(Torneo tournament) {
         this.tournament = tournament;
     }
 
-    public Team getHomeTeam() {
+    public Squadra getHomeTeam() {
         return homeTeam;
     }
 
-    public void setHomeTeam(Team homeTeam) {
+    public void setHomeTeam(Squadra homeTeam) {
         this.homeTeam = homeTeam;
     }
 
-    public Team getAwayTeam() {
+    public Squadra getAwayTeam() {
         return awayTeam;
     }
 
-    public void setAwayTeam(Team awayTeam) {
+    public void setAwayTeam(Squadra awayTeam) {
         this.awayTeam = awayTeam;
     }
 
-    public Referee getReferee() {
-        return referee;
+    public Arbitro getArbitro() {
+        return arbitro;
     }
 
-    public void setReferee(Referee referee) {
-        this.referee = referee;
+    public void setArbitro(Arbitro arbitro) {
+        this.arbitro = arbitro;
     }
 
-    public List<Comment> getComments() {
-        return comments;
+    public List<Commento> getCommenti() {
+        return commenti;
     }
 
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
+    public void setCommenti(List<Commento> commenti) {
+        this.commenti = commenti;
     }
 
 }

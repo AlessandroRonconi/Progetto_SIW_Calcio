@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import it.uniroma3.siw.football.exception.TournamentNotFoundException;
+import it.uniroma3.siw.football.exception.ResourceNotFoundException;
 import it.uniroma3.siw.football.model.ClassificationRow;
 import it.uniroma3.siw.football.model.Team;
 import it.uniroma3.siw.football.model.Tournament;
@@ -38,7 +38,7 @@ public class TournamentService {
     @Transactional(readOnly = true)
     public Tournament findById(Long id) {
         return this.tournamentRepository.findById(id)
-                .orElseThrow(() -> new TournamentNotFoundException(id));
+                .orElseThrow(() -> new ResourceNotFoundException("Torneo non trovato."));
     }
 
     @Transactional

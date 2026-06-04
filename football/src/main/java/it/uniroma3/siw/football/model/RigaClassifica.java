@@ -2,7 +2,7 @@ package it.uniroma3.siw.football.model;
 
 import java.util.List;
 
-public class ClassificationRow {
+public class RigaClassifica {
     private Long teamId;
     private String teamName;
     private int playedGames;
@@ -14,26 +14,26 @@ public class ClassificationRow {
     private int goalsDifference;
     private int points;
 
-    public ClassificationRow(Team team, List<Game> teamGames) {
-        this.teamId = team.getId();
-        this.teamName = team.getName();
-        this.playedGames = teamGames.size();
+    public RigaClassifica(Squadra squadra, List<Partita> partiteSquadra) {
+        this.teamId = squadra.getId();
+        this.teamName = squadra.getName();
+        this.playedGames = partiteSquadra.size();
 
-        for (Game game : teamGames) {
-            boolean isHome = game.getHomeTeam().getId().equals(team.getId());
+        for (Partita partita : partiteSquadra) {
+            boolean isHome = partita.getHomeTeam().getId().equals(squadra.getId());
 
-            int myGoals = 0;
+            int myGoals;
             if (isHome) {
-                myGoals = game.getGoalsHome();
+                myGoals = partita.getGoalsHome();
             } else {
-                myGoals = game.getGoalsAway();
+                myGoals = partita.getGoalsAway();
             }
 
-            int opponentGoals = 0;
+            int opponentGoals;
             if (isHome) {
-                opponentGoals = game.getGoalsAway();
+                opponentGoals = partita.getGoalsAway();
             } else {
-                opponentGoals = game.getGoalsHome();
+                opponentGoals = partita.getGoalsHome();
             }
 
             this.goalsFor += myGoals;

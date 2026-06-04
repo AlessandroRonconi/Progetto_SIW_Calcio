@@ -8,8 +8,8 @@ import it.uniroma3.siw.football.repository.CredentialsRepository;
 
 @Service
 public class CredentialsService {
-    private CredentialsRepository credentialsRepository;
-    private PasswordEncoder passwordEncoder;
+    private final CredentialsRepository credentialsRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public CredentialsService(CredentialsRepository credentialsRepository,
             PasswordEncoder passwordEncoder) {
