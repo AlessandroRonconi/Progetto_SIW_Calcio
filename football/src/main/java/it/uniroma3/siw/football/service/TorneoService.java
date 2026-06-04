@@ -7,36 +7,36 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.uniroma3.siw.football.exception.ResourceNotFoundException;
-import it.uniroma3.siw.football.model.ClassificationRow;
-import it.uniroma3.siw.football.model.Team;
-import it.uniroma3.siw.football.model.Tournament;
-import it.uniroma3.siw.football.repository.GameRepository;
-import it.uniroma3.siw.football.repository.TournamentRepository;
+import it.uniroma3.siw.football.model.RigaClassifica;
+import it.uniroma3.siw.football.model.Squadra;
+import it.uniroma3.siw.football.model.Torneo;
+import it.uniroma3.siw.football.repository.PartitaRepository;
+import it.uniroma3.siw.football.repository.TorneoRepository;
 
 @Service
-public class TournamentService {
-    private GameRepository gameRepository;
-    private TournamentRepository tournamentRepository;
-    
-    public TournamentService(TournamentRepository tournamentRepository, GameRepository gameRepository) {
+public class TorneoService {
+    private final PartitaRepository partitaRepository;
+    private final TorneoRepository tournamentRepository;
+
+    public TorneoService(TorneoRepository tournamentRepository, PartitaRepository partitaRepository) {
         this.tournamentRepository = tournamentRepository;
-        this.gameRepository = gameRepository;
+        this.partitaRepository = partitaRepository;
     }
 
     @Transactional(readOnly = true)
-    public List<Tournament> findAll() {
-        List<Tournament> list = new ArrayList<>();
+    public List<Torneo> findAll() {
+        List<Torneo> list = new ArrayList<>();
         this.tournamentRepository.findAll().forEach(list::add);
         return list;
     }
 
     @Transactional
-    public Tournament save(Tournament tournament) {
+    public Torneo save(Torneo tournament) {
         return this.tournamentRepository.save(tournament);
     }
 
     @Transactional(readOnly = true)
-    public Tournament findById(Long id) {
+    public Torneo findById(Long id) {
         return this.tournamentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Torneo non trovato."));
     }
@@ -52,23 +52,23 @@ public class TournamentService {
     }
 
     @Transactional(readOnly = true)
-    public List<ClassificationRow> getClassificationTable(Long tournamentId) {
-        Tournament tournament = this.findById(tournamentId);
+    public List<RigaClassifica> getClassificationTable(Long tournamentId) {
+        Torneo tournament = this.findById(tournamentId);
         if (tournament == null)
             return new ArrayList<>();
 
         // Prende i team partecipanti
-        List<Team> teams = tournament.getTeams();
+        List<Squadra> teams = tournament.getSquadre();
 
-        List<ClassificationRow> rows = new ArrayList<>();
+        List<RigaClassifica> righe = new ArrayList<>();
 
-        for (Team team : teams) {
+        for (Squadra team : teams) {
             // Filtra solo i match giocati da questa squadra
-            rows.add(new ClassificationRow(team, gameRepository.findPlayedByTeam(team.getId())));
+            righe.add(new RigaClassifica(team, partitaRepository.findPlayedByTeam(team.getId())));
         }
 
         // Ordina per Punti (e Differenza Reti come secondo criterio)
-        rows.sort((r1, r2) -> {
+        righe.sort((r1, r2) -> {
             int res = Integer.compare(r2.getPoints(), r1.getPoints());
             if (res == 0) {
                 return Integer.compare(r2.getGoalsDifference(), r1.getGoalsDifference());
@@ -76,7 +76,7 @@ public class TournamentService {
             return res;
         });
 
-        return rows;
+        return righe;
     }
 
 }
