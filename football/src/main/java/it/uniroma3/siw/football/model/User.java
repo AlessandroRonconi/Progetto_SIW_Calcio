@@ -21,6 +21,8 @@ public class User {
     @NotBlank
     @Column(nullable = false, unique = true)
     private String username;
+    @NotBlank
+    private String email;
 
     public User() {
     }
@@ -72,6 +74,14 @@ public class User {
     @Override
     public int hashCode() {
         return name.hashCode() + surname.hashCode() + username.hashCode();
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 }

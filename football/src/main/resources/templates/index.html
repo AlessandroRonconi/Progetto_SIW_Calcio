@@ -2,13 +2,27 @@
 <html>
 
 <head>
-    <title>Tornei di calcio</title>
+    <title>SiwFootball - Home</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <span th:if="${userDetails != null}">
+        Sei loggato come: <b th:text="${userDetails.username}"></b>
+    </span>
+    <span th:if="${userDetails == null}">
+        Non sei loggato
+    </span>
 </head>
 
 <body>
     <h1>
         <a href="/tournaments">Lista Tornei</a>
+    </h1>
+
+    <h1>
+        <a href="/login">Accedi</a>
+    </h1>
+
+    <h1>
+        <a href="/register">Registrati</a>
     </h1>
 </body>
 
