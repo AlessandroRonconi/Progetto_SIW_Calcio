@@ -2,6 +2,7 @@ package it.uniroma3.siw.football.service;
 
 import java.time.LocalDateTime;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.uniroma3.siw.football.exception.ResourceNotFoundException;
@@ -13,6 +14,7 @@ import it.uniroma3.siw.football.repository.CommentoRepository;
 import it.uniroma3.siw.football.repository.CredentialsRepository;
 import it.uniroma3.siw.football.repository.PartitaRepository;
 
+@Service
 public class CommentoService {
 
     private final CommentoRepository commentoRepository;
@@ -54,7 +56,7 @@ public class CommentoService {
     @Transactional(readOnly = true)
     public Commento findById(Long id) {
         return this.commentoRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Commentoo non trovato."));
+                .orElseThrow(() -> new ResourceNotFoundException("Commento non trovato."));
     }
 
     @Transactional(readOnly = true)

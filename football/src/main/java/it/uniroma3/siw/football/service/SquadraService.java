@@ -12,7 +12,7 @@ import it.uniroma3.siw.football.repository.SquadraRepository;
 
 @Service
 public class SquadraService {
-    private SquadraRepository squadraRepository;
+    private final SquadraRepository squadraRepository;
 
     public SquadraService(SquadraRepository squadraRepository) {
         this.squadraRepository = squadraRepository;

@@ -34,7 +34,7 @@ public class Partita {
     private PartitaStatus status;
 
     @ManyToOne
-    private Torneo tournament;
+    private Torneo torneo;
     @ManyToOne
     private Squadra homeTeam;
     @ManyToOne
@@ -93,11 +93,11 @@ public class Partita {
     }
 
     public Torneo getTorneo() {
-        return tournament;
+        return torneo;
     }
 
-    public void setTorneo(Torneo tournament) {
-        this.tournament = tournament;
+    public void setTorneo(Torneo torneo) {
+        this.torneo = torneo;
     }
 
     public Squadra getHomeTeam() {
