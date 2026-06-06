@@ -26,8 +26,8 @@ public class SquadraService {
     }
 
     @Transactional
-    public Squadra save(Squadra t) {
-        return this.squadraRepository.save(t);
+    public void save(Squadra t) {
+        this.squadraRepository.save(t);
     }
 
     @Transactional
@@ -36,4 +36,12 @@ public class SquadraService {
                 .orElseThrow(() -> new ResourceNotFoundException("Squadra non trovata."));
     }
 
+    @Transactional
+    public void editSquadra(Long squadraId, String nome, Long anno, String citta) {
+        Squadra squadra = this.findById(squadraId);
+        squadra.setName(nome);
+        squadra.setYearOfFoundation(anno);
+        squadra.setCity(citta);
+        this.save(squadra);
+    }
 }

@@ -28,6 +28,12 @@
             </div>
         </div>
     </section>
+
+    <h2>
+        <div sec:authorize="hasAnyAuthority('ADMIN')">
+            <a th:href="@{/admin/teams/{id}/edit(id=${team.id})}">Modifica</a>
+        </div>
+    </h2>
 </body>
 
 </html>
