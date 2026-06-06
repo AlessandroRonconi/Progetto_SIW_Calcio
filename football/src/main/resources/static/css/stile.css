@@ -111,7 +111,7 @@ button:disabled {
 }
 
 /* Contenitore principale della sezione */
-.staff-section {
+.players-section {
     margin-bottom: 40px;
     /* Spazio tra la lista sopra e quella sotto */
 }
@@ -129,7 +129,7 @@ button:disabled {
     overflow-x: auto;
 }
 
-/* Stile delle singole schede dello staff */
+/* Stile delle singole schede */
 .card {
     flex: 0 0 250px;
     /* Blocca la larghezza minima di ogni scheda a 250px */
@@ -145,7 +145,6 @@ button:disabled {
 .card h3 {
     margin-top: 0;
     color: rgb(255, 0, 0);
-    /* Mantiene il rosso del tuo progetto */
     font-size: 1.2rem;
 }
 

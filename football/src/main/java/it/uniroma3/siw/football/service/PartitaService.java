@@ -21,7 +21,8 @@ public class PartitaService {
 
     @Transactional
     public Partita findById(Long id) {
-        return this.partitaRepository.findById(id).get();
+        return this.partitaRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Partita non trovata"));
     }
 
     @Transactional
@@ -36,7 +37,8 @@ public class PartitaService {
 
     @Transactional
     public void updateResult(Long id, int home, int away) {
-        Partita p = partitaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Partita non trovata."));
+        Partita p = partitaRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Partita non trovata."));
 
         p.setGoalsHome(home);
         p.setGoalsAway(away);

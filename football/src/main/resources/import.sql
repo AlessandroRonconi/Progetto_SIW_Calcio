@@ -45,3 +45,46 @@ INSERT INTO partita(id, date_time, place, goals_home, goals_away, status, torneo
 INSERT INTO partita(id, date_time, place, goals_home, goals_away, status, torneo_id, home_team_id, away_team_id) VALUES (nextval('partita_seq'), '2026-03-28 15:00:00', 'Stadio Olimpico, Roma', NULL, NULL, 'SCHEDULED', 1, 1, 201);
 INSERT INTO partita(id, date_time, place, goals_home, goals_away, status, torneo_id, home_team_id, away_team_id) VALUES (nextval('partita_seq'), '2026-03-28 17:30:00', 'Arena Milano, Milano', NULL, NULL, 'SCHEDULED', 1, 101, 251);
 INSERT INTO partita(id, date_time, place, goals_home, goals_away, status, torneo_id, home_team_id, away_team_id) VALUES (nextval('partita_seq'), '2026-03-28 20:00:00', 'Stadio Olimpico, Torino', NULL, NULL, 'SCHEDULED', 1, 151, 51);
+
+-- GIOCATORI
+-- Roma Nord FC (squadra_id = 1)
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Luca',      'Ferretti',   '2005-03-12', 'Portiere',   1.88, 1);
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Marco',     'Rinaldi',    '2006-07-22', 'Difensore',  1.82, 1);
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Davide',    'Testa',      '2005-11-05', 'Difensore',  1.80, 1);
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Andrea',    'Colombo',    '2007-01-18', 'Centrocampista', 1.76, 1);
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Matteo',    'Gallo',      '2006-09-30', 'Attaccante', 1.79, 1);
+
+-- Lazio Sud SC (squadra_id = 51)
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Simone',    'Caruso',     '2005-05-14', 'Portiere',   1.90, 51);
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Gabriele',  'Marini',     '2006-02-27', 'Difensore',  1.83, 51);
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Federico',  'Esposito',   '2007-08-09', 'Difensore',  1.78, 51);
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Lorenzo',   'De Luca',    '2005-12-03', 'Centrocampista', 1.75, 51);
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Alessandro','Romano',     '2006-06-21', 'Attaccante', 1.81, 51);
+
+-- Milano United (squadra_id = 101)
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Pietro',    'Fontana',    '2005-04-17', 'Portiere',   1.86, 101);
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Riccardo',  'Conti',      '2006-10-08', 'Difensore',  1.84, 101);
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Nicola',    'Mancini',    '2007-03-25', 'Difensore',  1.79, 101);
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Tommaso',   'Vitale',     '2005-07-11', 'Centrocampista', 1.77, 101);
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Filippo',   'Serra',      '2006-01-29', 'Attaccante', 1.80, 101);
+
+-- Torino Academy (squadra_id = 151)
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Enrico',    'Greco',      '2005-09-06', 'Portiere',   1.87, 151);
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Stefano',   'Moretti',    '2006-04-14', 'Difensore',  1.81, 151);
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Giorgio',   'Lombardi',   '2007-06-02', 'Difensore',  1.83, 151);
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Claudio',   'Ferrari',    '2005-02-19', 'Centrocampista', 1.74, 151);
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Antonio',   'Barbieri',   '2006-11-07', 'Attaccante', 1.78, 151);
+
+-- Napoli Young (squadra_id = 201)
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Vincenzo',  'Amato',      '2005-08-23', 'Portiere',   1.89, 201);
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Salvatore', 'Russo',      '2006-03-31', 'Difensore',  1.80, 201);
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Pasquale',  'Giordano',   '2007-09-15', 'Difensore',  1.77, 201);
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Ciro',      'De Santis',  '2005-05-28', 'Centrocampista', 1.76, 201);
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Luigi',     'Sorrentino', '2006-12-10', 'Attaccante', 1.82, 201);
+
+-- Fiorentina Boys (squadra_id = 251)
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Massimo',   'Innocenti',  '2005-01-07', 'Portiere',   1.85, 251);
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Roberto',   'Pellegrini', '2006-08-16', 'Difensore',  1.82, 251);
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Bruno',     'Cattaneo',   '2007-04-22', 'Difensore',  1.79, 251);
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Dario',     'Rossi',      '2005-10-13', 'Centrocampista', 1.73, 251);
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Carlo',     'Benedetti',  '2006-05-04', 'Attaccante', 1.80, 251);

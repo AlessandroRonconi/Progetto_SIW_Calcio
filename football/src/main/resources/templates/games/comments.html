@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/springsecurity6">
 
 <head>
     <title>Commenti</title>
@@ -31,7 +31,7 @@
 
         <!-- modifica se mio commento, non metto protezione perche i non loggati non possono nemmeno vedere i commenti-->
 
-        <a th:if="${#authentication.name == c.author.username}"
+        <a sec:authorize="${#authentication.name == c.author.username}"
             th:href="@{'/games/' + ${game.id} + '/comments/' + ${c.id} + '/edit'}">
             Modifica
         </a>

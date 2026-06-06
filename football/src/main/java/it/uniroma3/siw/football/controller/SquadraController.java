@@ -28,6 +28,7 @@ public class SquadraController {
     public String getTeamDetail(@PathVariable Long id, Model model) {
         Squadra t = this.squadraService.findById(id);
         model.addAttribute("team", t);
+        model.addAttribute("players", t.getGiocatori());
         return "/teams/show.html";
     }
 }

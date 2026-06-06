@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dettaglio Partita</title>
+    <link rel="stylesheet" th:href="@{/css/stile.css}">
+</head>
+
+<body>
+
+    <h1>Dettaglio Partita</h1>
+
+    <div class="flex-container">
+        <div class="card">
+
+            <h3 th:text="${game.homeTeam?.name + ' vs ' + game.awayTeam?.name}">
+                Home vs Away
+            </h3>
+
+            <p>
+                <strong>Risultato:</strong>
+                <span th:if="${game.status.name() == 'FINISHED' or game.status.name() == 'ONGOING'}"
+                    th:text="${game.goalsHome + ' - ' + game.goalsAway}">0 - 0</span>
+                <span th:unless="${game.status.name() == 'FINISHED' or game.status.name() == 'ONGOING'}">
+                    Non ancora disputata
+                </span>
+            </p>
+
+            <p>
+                <strong>Stato:</strong>
+                <span th:text="${game.status}">STATUS</span>
+            </p>
+
+            <p>
+                <strong>Data e ora:</strong>
+                <span th:text="${#temporals.format(game.dateTime, 'dd/MM/yyyy HH:mm')}">
+                    01/01/2024 20:45
+                </span>
+            </p>
+
+            <p>
+                <strong>Stadio:</strong>
+                <span th:text="${game.place}">Stadio</span>
+            </p>
+
+            <p th:if="${game.torneo != null}">
+                <strong>Torneo:</strong>
+                <span th:text="${game.torneo.name}">Torneo</span>
+            </p>
+
+            <p th:if="${game.arbitro != null}">
+                <strong>Arbitro:</strong>
+                <span th:text="${game.arbitro.name + ' ' + game.arbitro.surname}">Nome Arbitro</span>
+            </p>
+
+        </div>
+    </div>
+
+    <div>
+        <a th:href="@{/games/{id}/comments(id=${game.id})}">Vedi commenti</a>
+        &nbsp;|&nbsp;
+        <a th:href="@{/games/{id}/comments/new(id=${game.id})}" sec:authorize="isAuthenticated()">
+            Aggiungi commento
+        </a>
+    </div>
+
+</body>
+
+</html>

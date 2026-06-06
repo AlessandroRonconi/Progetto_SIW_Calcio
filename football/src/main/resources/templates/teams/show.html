@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dettaglio Squadra</title>
+    <link rel="stylesheet" href="/css/stile.css">
+</head>
+
+<body>
+    <h1 th:text="${team.name}">Nome</h1>
+
+    <div>
+        Anno di Fondazione: <span th:text="${team.yearOfFoundation}">2001</span>
+    </div>
+
+    <div>
+        Città: <span th:text="${team.city}">Lamezia Terme</span>
+    </div>
+
+    <section class="players-section">
+        <h2>Giocatori</h2>
+        <div class="flex-container">
+            <div class="card" th:each="p:${players}">
+                <h3 th:text="${p.firstName} + ' ' + ${p.lastName}">Mario Rossi</h3>
+                <p><strong>Data di nascita:</strong> <span th:text="${#temporals.format(p.dateOfBirth, 'dd/MM/yyyy')}">01/01/2001</span></p>
+                <p><strong>Altezza:</strong> <span th:text="${p.height}">1.75</span></p>
+                <p><strong>Ruolo:</strong> <span th:text="${p.role}">Centrocampista</span></p>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

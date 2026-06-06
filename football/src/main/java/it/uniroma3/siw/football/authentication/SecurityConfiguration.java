@@ -46,8 +46,8 @@ public class SecurityConfiguration {
             authorize.requestMatchers(HttpMethod.GET, "/tournaments", "/tournaments/{id}", "/tournaments/{id}/participants", "/tournaments/{id}/calendar", "/tournaments/{id}/classification", "/games/{id}").permitAll();
             authorize.requestMatchers(HttpMethod.GET, "/teams", "/teams/{id}").permitAll();
 
-            authorize.requestMatchers(HttpMethod.GET, "/games/{id}/comments").authenticated();
-            authorize.requestMatchers(HttpMethod.POST, "/games/{id}/comments").authenticated();
+            authorize.requestMatchers(HttpMethod.GET, "/games/{id}/comments/**").authenticated();
+            authorize.requestMatchers(HttpMethod.POST, "/games/{id}/comments/**").authenticated();
             authorize.requestMatchers(HttpMethod.GET, "/comments/{id}/edit").authenticated();
             authorize.requestMatchers(HttpMethod.POST, "/comments/{id}/edit").authenticated();
 

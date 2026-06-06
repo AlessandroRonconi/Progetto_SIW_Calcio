@@ -41,7 +41,7 @@ public class Partita {
     private Squadra awayTeam;
     @ManyToOne
     private Arbitro arbitro;
-    @OneToMany
+    @OneToMany(mappedBy = "partita")
     private List<Commento> commenti;
 
     public Long getId() {

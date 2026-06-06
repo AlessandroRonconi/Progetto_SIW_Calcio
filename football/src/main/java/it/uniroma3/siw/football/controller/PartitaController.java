@@ -35,7 +35,7 @@ public class PartitaController {
     }
 
     @GetMapping("/games/{id}/comments")
-    public String getCommentoi(@PathVariable Long id, Model model) {
+    public String getCommenti(@PathVariable Long id, Model model) {
         Partita g = this.gameService.findById(id);
         model.addAttribute("game", g);
         model.addAttribute("comments", g.getCommenti());
@@ -72,7 +72,7 @@ public class PartitaController {
         return "comments/editForm";
     }
 
-    @PostMapping("/games/{gameId}/comments/{commentsd}/edit")
+    @PostMapping("/games/{gameId}/comments/{commentId}/edit")
     public String editedCommento(@PathVariable("gameId") Long gameId, @PathVariable("commentId") Long commentId,
             @Valid @ModelAttribute("comment") Commento commentForm, BindingResult bindingResult,
             @AuthenticationPrincipal UserDetails userDetails, Model model) {

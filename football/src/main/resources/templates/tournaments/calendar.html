@@ -26,15 +26,22 @@
         <tbody>
             <tr th:each="game : ${games}">
                 <td th:text="${#temporals.format(game.dateTime, 'dd/MM/yyyy HH:mm')}">01/01/2024 20:45</td>
-                <td th:text="${game.homeTeam.name}">Casa</td>
+                <td>
+                    <a th:href="@{/teams/{id}(id=${game.homeTeam.id})}" th:text="${game.homeTeam.name}">Casa</a>
+                </td>
                 <td>
                     <span th:if="${game.status.name() == 'SCHEDULED'}">-</span>
                     <span th:unless="${game.status.name() == 'SCHEDULED'}"
                         th:text="${game.goalsHome} + ' - ' + ${game.goalsAway}">0 - 0</span>
                 </td>
-                <td th:text="${game.awayTeam.name}">Ospite</td>
+                <td>
+                    <a th:href="@{/teams/{id}(id=${game.awayTeam.id})}" th:text="${game.awayTeam.name}">Ospite</a>
+                </td>
                 <td th:text="${game.place}">Stadio</td>
                 <td th:text="${game.status}">SCHEDULED</td>
+                <td>
+                    <a th:href="@{/games/{id}(id=${game.id})}">Dettagli</a>
+                </td>
             </tr>
         </tbody>
     </table>

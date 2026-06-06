@@ -1,6 +1,6 @@
 package it.uniroma3.siw.football.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,7 +20,7 @@ public class Giocatore {
     @Column(nullable = false)
     private String lastName;
     @Column(name = "date_of_birth", nullable = false)
-    private LocalDateTime dateOfBirth;
+    private LocalDate dateOfBirth;
     @Column(nullable = false)
     private String role;
     @Column(nullable = false)
@@ -53,11 +53,11 @@ public class Giocatore {
         this.lastName = lastName;
     }
 
-    public LocalDateTime getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDateTime dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

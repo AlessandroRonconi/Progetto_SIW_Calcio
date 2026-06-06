@@ -9,7 +9,7 @@
 <body>
 
     <h1>Aggiungi un commento</h1>
-    <form th:action="@{'/games/' + ${game.id} + '/comments/new'}" method="POST" th:object="${comment}">
+    <form th:action="@{/games/{id}/comments/new(id=${game.id})}" method="POST" th:object="${comment}">
 
         <div>
             Testo: <span><input required type="text" th:field="*{text}" /></span>
