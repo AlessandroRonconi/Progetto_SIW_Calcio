@@ -2,13 +2,13 @@
 <html>
 
 <head>
-    <title>Modifica comment</title>
+    <title>Modifica commento</title>
     <link rel="stylesheet" href="/css/stile.css" />
 </head>
 
 <body>
 
-    <h1>Modifica il comment</h1>
+    <h1>Modifica il commento</h1>
     <form th:action="@{'/games/' + ${gameId} + '/comments/' + ${comment.id} + '/edit'}" method="POST"
         th:object="${comment}">
 

@@ -10,6 +10,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Torneo {
@@ -17,10 +19,15 @@ public class Torneo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @NotBlank(message="Il nome del torneo è obbligatorio")
     @Column(nullable = false)
     private String name;
+
+    @NotNull(message="L'anno del torneo è obbligatorio")
     @Column(nullable = false)
     private Long year;
+    
     @Column(columnDefinition = "TEXT")
     private String description;
 

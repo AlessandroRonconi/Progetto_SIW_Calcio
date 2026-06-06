@@ -23,6 +23,12 @@
     <h2>
         <a th:href="@{'/tournaments/' + ${tournament.id} + '/classification'}">Classifica del torneo</a>
     </h2>
+
+    <h2>
+        <div sec:authorize="hasAnyAuthority('ADMIN')">
+            <a th:href="@{/admin/tournaments/{id}/edit(id=${tournament.id})}">Modifica</a>
+        </div>
+    </h2>
 </body>
 
 </html>

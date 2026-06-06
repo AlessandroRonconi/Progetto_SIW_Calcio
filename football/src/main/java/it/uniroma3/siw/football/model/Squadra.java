@@ -8,7 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity
@@ -24,8 +24,8 @@ public class Squadra {
     @Column(nullable = false)
     private String city;
 
-    @ManyToMany
-    private List<Torneo> tornei;
+    @ManyToOne
+    private Torneo torneo;
     @OneToMany(mappedBy = "squadra", cascade = CascadeType.ALL)
     private List<Giocatore> giocatori;
 
@@ -61,12 +61,12 @@ public class Squadra {
         this.city = city;
     }
 
-    public List<Torneo> getTornei() {
-        return tornei;
+    public Torneo getTorneo() {
+        return torneo;
     }
 
-    public void setTornei(List<Torneo> tornei) {
-        this.tornei = tornei;
+    public void setTorneo(Torneo torneo) {
+        this.torneo = torneo;
     }
 
     public List<Giocatore> getGiocatori() {

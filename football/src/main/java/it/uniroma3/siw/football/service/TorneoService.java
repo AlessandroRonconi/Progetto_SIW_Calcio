@@ -79,4 +79,13 @@ public class TorneoService {
         return righe;
     }
 
+    @Transactional
+    public void editTorneo(Long torneoId, String nome, Long anno, String descrizione) {
+        Torneo torneo = this.findById(torneoId);
+        torneo.setName(nome);
+        torneo.setYear(anno);
+        torneo.setDescription(descrizione);
+        this.save(torneo);
+    }
+
 }

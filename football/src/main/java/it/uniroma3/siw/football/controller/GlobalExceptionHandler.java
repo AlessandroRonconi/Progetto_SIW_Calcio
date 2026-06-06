@@ -17,4 +17,11 @@ public class GlobalExceptionHandler {
         model.addAttribute("errorMessage", e.getMessage());
         return "error/404";
     }
+
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public String handleGenericException(Exception e, Model model) {
+        model.addAttribute("errorMessage", "Si è verificato un errore interno.");
+        return "error/500";
+    }
 }

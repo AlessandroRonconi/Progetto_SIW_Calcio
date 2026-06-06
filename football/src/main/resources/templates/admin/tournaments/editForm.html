@@ -2,14 +2,13 @@
 <html>
 
 <head>
-    <title>Nuovo Torneo</title>
+    <title>Modifica torneo</title>
     <link rel="stylesheet" href="/css/stile.css" />
 </head>
 
 <body>
-    <h1>Aggiungi un torneo</h1>
-    <form th:action="@{/admin/tournaments/new}" method="POST" th:object="${tournament}">
-
+    <h1>Modifica il torneo</h1>
+    <form th:action="@{/admin/tournaments/{id}/edit(id=${tournament.id})}" method="post" th:object="${tournament}">
         <div>
             Nome: <span><input type="text" th:field="*{name}" /></span>
             <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error-message"></span>
