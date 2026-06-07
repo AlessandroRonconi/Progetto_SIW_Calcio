@@ -28,9 +28,6 @@
 
         <div>
             Squadre:
-            <th:block th:each="team : *{squadre}">
-                <input type="hidden" name="teamIds" th:value="${team.id}" />
-            </th:block>
             <div>
                 <select name="teamId">
                     <option value="">-- Seleziona una squadra --</option>
@@ -41,7 +38,11 @@
             <div th:if="${not #lists.isEmpty(tournament.squadre)}">
                 <h3>Squadre selezionate:</h3>
                 <ul>
-                    <li th:each="team : *{squadre}" th:text="${team.name}">Lamezia Terme FC</li>
+                    <li th:each="team : *{squadre}">
+                        <input type="hidden" name="teamIds" th:value="${team.id}" />
+                        <span th:text="${team.name}"></span>
+                        <button type="submit" name="action" th:value="'removeTeam_' + ${team.id}">Rimuovi</button>
+                    </li>
                 </ul>
             </div>
             <span th:if="${#lists.isEmpty(tournament.squadre)}">Nessuna squadra specificata</span>

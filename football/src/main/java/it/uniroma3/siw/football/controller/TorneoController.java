@@ -94,6 +94,13 @@ public class TorneoController {
 
         tournament.setSquadre(teams);
 
+        if (action != null && action.startsWith("removeTeam_")) {
+            Long removeId = Long.valueOf(action.substring("removeTeam_".length()));
+            tournament.getSquadre().removeIf(s -> s.getId().equals(removeId));
+            model.addAttribute("teams", squadraService.findAll());
+            return "admin/tournaments/form";
+        }
+
         if ("addTeam".equals(action)) {
             if (teamId != null && teamId > 0) {
                 Squadra team = squadraService.findById(teamId);
@@ -140,6 +147,13 @@ public class TorneoController {
         }
         tournament.setSquadre(teams);
         tournament.setId(id);
+
+        if (action != null && action.startsWith("removeTeam_")) {
+            Long removeId = Long.valueOf(action.substring("removeTeam_".length()));
+            tournament.getSquadre().removeIf(s -> s.getId().equals(removeId));
+            model.addAttribute("teams", squadraService.findAll());
+            return "admin/tournaments/form";
+        }
 
         if ("addTeam".equals(action)) {
             if (teamId != null && teamId > 0) {
