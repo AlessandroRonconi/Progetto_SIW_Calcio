@@ -141,8 +141,8 @@ public class TorneoController {
 
         List<Squadra> teams = new ArrayList<>();
         if (teamIds != null) {
-            for (Long tid : teamIds) {
-                teams.add(squadraService.findById(tid));
+            for (Long tId : teamIds) {
+                teams.add(squadraService.findById(tId));
             }
         }
         tournament.setSquadre(teams);

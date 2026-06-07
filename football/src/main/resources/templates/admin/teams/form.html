@@ -8,7 +8,9 @@
 
 <body>
     <h1>Aggiungi una squadra</h1>
-    <form th:action="@{/admin/teams/new}" method="POST" th:object="${team}">
+    <form th:action="${team.id != null}
+    ? @{/admin/teams/{id}/edit(id = ${team.id})}
+    : @{/admin/teams/new}" method="POST" th:object="${team}">
 
         <div>
             Nome: <span><input type="text" th:field="*{name}" /></span>
@@ -16,7 +18,7 @@
         </div>
 
         <div>
-            Anno di fondazione: <span><input type="text" th:field="*{year}" /></span>
+            Anno di fondazione: <span><input type="text" th:field="*{yearOfFoundation}" /></span>
             <span th:if="${#fields.hasErrors('yearOfFoundation')}" th:errors="*{yearOfFoundation}"
                 class="error-message"></span>
         </div>
@@ -25,6 +27,29 @@
             Città: <span><input type="text" th:field="*{city}" /></span>
             <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}" class="error-message"></span>
         </div>
+
+        <div>
+            Giocatori:
+            <div>
+                <select name="playerId">
+                    <option value="">-- Seleziona un giocatore --</option>
+                    <option th:each="player: ${players}" th:value="${player.id}" th:text="${player.firstName} + ' ' + ${player.lastName}"></option>
+                </select>
+                <button type="submit" name="action" value="addPlayer">Aggiungi</button>
+            </div>
+            <div th:if="${not #lists.isEmpty(team.giocatori)}">
+                <h3>Giocatori selezionati:</h3>
+                <ul>
+                    <li th:each="player : *{giocatori}">
+                        <input type="hidden" name="playerIds" th:value="${player.id}" />
+                        <span th:text="${player.firstName} + ' ' + ${player.lastName}"></span>
+                        <button type="submit" name="action" th:value="'removePlayer_' + ${player.id}">Rimuovi</button>
+                    </li>
+                </ul>
+            </div>
+            <span th:if="${#lists.isEmpty(tournament.squadre)}">Nessuna squadra specificata</span>
+        </div>
+
 
         <div>
             <span><button type="submit">Salva</button></span>
