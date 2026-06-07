@@ -1,5 +1,8 @@
 package it.uniroma3.siw.football.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -7,21 +10,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import it.uniroma3.siw.football.model.Squadra;
 import it.uniroma3.siw.football.model.Torneo;
 import it.uniroma3.siw.football.service.PartitaService;
+import it.uniroma3.siw.football.service.SquadraService;
 import it.uniroma3.siw.football.service.TorneoService;
 import jakarta.validation.Valid;
 
 @Controller
 
 public class TorneoController {
+    private final SquadraService squadraService;
     private final PartitaService partitaService;
     private final TorneoService torneoService;
 
-    public TorneoController(TorneoService torneoService, PartitaService partitaService) {
+    public TorneoController(TorneoService torneoService, PartitaService partitaService, SquadraService squadraService) {
         this.torneoService = torneoService;
         this.partitaService = partitaService;
+        this.squadraService = squadraService;
     }
 
     @GetMapping("/tournaments")
@@ -63,34 +71,93 @@ public class TorneoController {
 
     @GetMapping("/admin/tournaments/new")
     public String getTorneoForm(Model model) {
-        model.addAttribute("tournament", new Torneo());
+        Torneo tournament = new Torneo();
+        tournament.setSquadre(new ArrayList<>());
+        model.addAttribute("tournament", tournament);
+        model.addAttribute("teams", squadraService.findAll());
         return "admin/tournaments/form";
     }
 
     @PostMapping("/admin/tournaments/new")
-    public String postTorneoForm(@Valid @ModelAttribute("tournament") Torneo tournament, BindingResult bindingResult,
-            Model model) {
-        if (bindingResult.hasErrors())
+    public String postTorneoForm(@Valid @ModelAttribute("tournament") Torneo tournament,
+            BindingResult bindingResult, Model model,
+            @RequestParam(required = false) String action,
+            @RequestParam(required = false) Long teamId,
+            @RequestParam(required = false) List<Long> teamIds) {
+
+        List<Squadra> teams = new ArrayList<>();
+        if (teamIds != null) {
+            for (Long id : teamIds) {
+                teams.add(squadraService.findById(id));
+            }
+        }
+
+        tournament.setSquadre(teams);
+
+        if ("addTeam".equals(action)) {
+            if (teamId != null && teamId > 0) {
+                Squadra team = squadraService.findById(teamId);
+                if (!tournament.getSquadre().contains(team)) {
+                    tournament.getSquadre().add(team);
+                }
+            }
+            model.addAttribute("teams", squadraService.findAll());
             return "admin/tournaments/form";
+        }
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("teams", squadraService.findAll());
+            return "admin/tournaments/form";
+        }
+
         this.torneoService.save(tournament);
         return "redirect:/tournaments";
     }
 
     @GetMapping("/admin/tournaments/{id}/edit")
     public String getTorneoEditForm(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("tournament", torneoService.findById(id));
-        return "admin/tournaments/editForm";
+        Torneo tournament = torneoService.findById(id);
+        if (tournament.getSquadre() == null)
+            tournament.setSquadre(new ArrayList<>());
+        model.addAttribute("tournament", tournament);
+        model.addAttribute("teams", squadraService.findAll());
+        return "admin/tournaments/form";
     }
 
     @PostMapping("/admin/tournaments/{id}/edit")
     public String postTorneoEditForm(@PathVariable("id") Long id,
             @Valid @ModelAttribute("tournament") Torneo tournament,
-            BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("tournament", tournament);
-            return "admin/tournaments/editForm";
+            BindingResult bindingResult, Model model,
+            @RequestParam(required = false) String action,
+            @RequestParam(required = false) Long teamId,
+            @RequestParam(required = false) List<Long> teamIds) {
+
+        List<Squadra> teams = new ArrayList<>();
+        if (teamIds != null) {
+            for (Long tid : teamIds) {
+                teams.add(squadraService.findById(tid));
+            }
         }
-        torneoService.editTorneo(id, tournament.getName(), tournament.getYear(), tournament.getDescription());
+        tournament.setSquadre(teams);
+        tournament.setId(id);
+
+        if ("addTeam".equals(action)) {
+            if (teamId != null && teamId > 0) {
+                Squadra team = squadraService.findById(teamId);
+                if (!tournament.getSquadre().contains(team)) {
+                    tournament.getSquadre().add(team);
+                }
+            }
+            model.addAttribute("teams", squadraService.findAll());
+            return "admin/tournaments/form";
+        }
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("teams", squadraService.findAll());
+            return "admin/tournaments/form";
+        }
+
+        torneoService.save(tournament);
         return "redirect:/tournaments/" + id;
     }
 

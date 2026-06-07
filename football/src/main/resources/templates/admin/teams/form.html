@@ -17,7 +17,8 @@
 
         <div>
             Anno di fondazione: <span><input type="text" th:field="*{year}" /></span>
-            <span th:if="${#fields.hasErrors('yearOfFoundation')}" th:errors="*{yearOfFoundation}" class="error-message"></span>
+            <span th:if="${#fields.hasErrors('yearOfFoundation')}" th:errors="*{yearOfFoundation}"
+                class="error-message"></span>
         </div>
 
         <div>

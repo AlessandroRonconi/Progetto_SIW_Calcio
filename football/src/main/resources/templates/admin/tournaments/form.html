@@ -8,7 +8,9 @@
 
 <body>
     <h1>Aggiungi un torneo</h1>
-    <form th:action="@{/admin/tournaments/new}" method="POST" th:object="${tournament}">
+    <form th:action="${tournament.id != null} 
+        ? @{/admin/tournaments/{id}/edit(id=${tournament.id})} 
+        : @{/admin/tournaments/new}" method="POST" th:object="${tournament}">
 
         <div>
             Nome: <span><input type="text" th:field="*{name}" /></span>
@@ -22,6 +24,27 @@
 
         <div>
             Descrizione: <span><input type="text" th:field="*{description}" /></span>
+        </div>
+
+        <div>
+            Squadre:
+            <th:block th:each="team : *{squadre}">
+                <input type="hidden" name="teamIds" th:value="${team.id}" />
+            </th:block>
+            <div>
+                <select name="teamId">
+                    <option value="">-- Seleziona una squadra --</option>
+                    <option th:each="team: ${teams}" th:value="${team.id}" th:text="${team.name}"></option>
+                </select>
+                <button type="submit" name="action" value="addTeam">Aggiungi</button>
+            </div>
+            <div th:if="${not #lists.isEmpty(tournament.squadre)}">
+                <h3>Squadre selezionate:</h3>
+                <ul>
+                    <li th:each="team : *{squadre}" th:text="${team.name}">Lamezia Terme FC</li>
+                </ul>
+            </div>
+            <span th:if="${#lists.isEmpty(tournament.squadre)}">Nessuna squadra specificata</span>
         </div>
 
         <div>
