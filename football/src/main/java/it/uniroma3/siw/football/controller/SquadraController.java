@@ -57,14 +57,17 @@ public class SquadraController {
             @RequestParam(required = false) String action,
             @RequestParam(required = false) Long playerId,
             @RequestParam(required = false) List<Long> playerIds) {
-        List<Giocatore> players = new ArrayList<>();
+
+        // Logica UI: Popoliamo l'oggetto temporaneo da far rivedere alla pagina
+        // Thymeleaf
+        List<Giocatore> currentPlayers = new ArrayList<>();
         if (playerIds != null) {
             for (Long id : playerIds)
-                players.add(giocatoreService.findById(id));
+                currentPlayers.add(giocatoreService.findById(id));
         }
+        team.setGiocatori(currentPlayers);
 
-        team.setGiocatori(players);
-
+        // Gestione bottoni intermedi (Aggiungi/Rimuovi Giocatore nel Form)
         if (action != null && action.startsWith("removePlayer_")) {
             Long removeId = Long.valueOf(action.substring("removePlayer_".length()));
             team.getGiocatori().removeIf(g -> g.getId().equals(removeId));
@@ -75,9 +78,8 @@ public class SquadraController {
         if ("addPlayer".equals(action)) {
             if (playerId != null && playerId > 0) {
                 Giocatore player = giocatoreService.findById(playerId);
-                if (!team.getGiocatori().contains(player)) {
+                if (!team.getGiocatori().contains(player))
                     team.getGiocatori().add(player);
-                }
             }
             model.addAttribute("players", giocatoreService.findBySquadraIsNull());
             return "admin/teams/form";
@@ -87,7 +89,9 @@ public class SquadraController {
             model.addAttribute("players", giocatoreService.findBySquadraIsNull());
             return "admin/teams/form";
         }
-        this.squadraService.save(team);
+
+        // IL CONTROLLER DELEGA TUTTO AL SERVICE
+        this.squadraService.save(team, playerIds);
         return "redirect:/teams";
     }
 
@@ -103,23 +107,26 @@ public class SquadraController {
 
     @PostMapping("/admin/teams/{id}/edit")
     public String postSquadraEditForm(@PathVariable("id") Long id,
-            @Valid @ModelAttribute("team") Squadra team,
+            @Valid @ModelAttribute("team") Squadra teamForm,
             BindingResult bindingResult, Model model,
             @RequestParam(required = false) String action,
             @RequestParam(required = false) Long playerId,
             @RequestParam(required = false) List<Long> playerIds) {
-        List<Giocatore> players = new ArrayList<>();
+
+        // Logica UI: Popoliamo l'oggetto temporaneo da far rivedere alla pagina
+        // Thymeleaf
+        List<Giocatore> tempPlayers = new ArrayList<>();
         if (playerIds != null) {
             for (Long pId : playerIds)
-                players.add(giocatoreService.findById(pId));
+                tempPlayers.add(giocatoreService.findById(pId));
         }
+        teamForm.setGiocatori(tempPlayers);
+        teamForm.setId(id);
 
-        team.setGiocatori(players);
-        team.setId(id);
-
+        // Gestione bottoni intermedi (Aggiungi/Rimuovi Giocatore nel Form)
         if (action != null && action.startsWith("removePlayer_")) {
             Long removeId = Long.valueOf(action.substring("removePlayer_".length()));
-            team.getGiocatori().removeIf(g -> g.getId().equals(removeId));
+            teamForm.getGiocatori().removeIf(g -> g.getId().equals(removeId));
             model.addAttribute("players", giocatoreService.findBySquadraIsNull());
             return "admin/teams/form";
         }
@@ -127,9 +134,8 @@ public class SquadraController {
         if ("addPlayer".equals(action)) {
             if (playerId != null && playerId > 0) {
                 Giocatore player = giocatoreService.findById(playerId);
-                if (!team.getGiocatori().contains(player)) {
-                    team.getGiocatori().add(player);
-                }
+                if (!teamForm.getGiocatori().contains(player))
+                    teamForm.getGiocatori().add(player);
             }
             model.addAttribute("players", giocatoreService.findBySquadraIsNull());
             return "admin/teams/form";
@@ -139,7 +145,15 @@ public class SquadraController {
             model.addAttribute("players", giocatoreService.findBySquadraIsNull());
             return "admin/teams/form";
         }
-        this.squadraService.save(team);
+
+        // IL CONTROLLER DELEGA TUTTO AL SERVICE
+        this.squadraService.update(id, teamForm, playerIds);
+        return "redirect:/teams";
+    }
+
+    @PostMapping("/admin/teams/{id}/delete")
+    public String deleteSquadra(@PathVariable("id") Long id) {
+        this.squadraService.delete(id);
         return "redirect:/teams";
     }
 }

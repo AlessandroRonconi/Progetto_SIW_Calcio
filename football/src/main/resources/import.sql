@@ -16,6 +16,7 @@ INSERT INTO squadra(id, name, city, year_of_foundation) VALUES (nextval('squadra
 INSERT INTO squadra(id, name, city, year_of_foundation) VALUES (nextval('squadra_seq'), 'Torino Academy', 'Torino',  2010);
 INSERT INTO squadra(id, name, city, year_of_foundation) VALUES (nextval('squadra_seq'), 'Napoli Young', 'Napoli',  2007);
 INSERT INTO squadra(id, name, city, year_of_foundation) VALUES (nextval('squadra_seq'), 'Fiorentina Boys', 'Firenze', 2006);
+SELECT setval('squadra_seq', 252);
 
 -- TOURNAMENT-TEAM (torneo Under 21 2026, id=1) 
 INSERT INTO torneo_squadre(torneo_id, squadre_id) VALUES (1, 1);
@@ -25,26 +26,31 @@ INSERT INTO torneo_squadre(torneo_id, squadre_id) VALUES (1, 151);
 INSERT INTO torneo_squadre(torneo_id, squadre_id) VALUES (1, 201);
 INSERT INTO torneo_squadre(torneo_id, squadre_id) VALUES (1, 251);
 
+-- ARBITRI
+INSERT INTO arbitro(id, first_name, last_name, code) VALUES (nextval('arbitro_seq'), 'Gianluca', 'Rocchi', 10001);
+INSERT INTO arbitro(id, first_name, last_name, code) VALUES (nextval('arbitro_seq'), 'Daniele', 'Orsato', 10002);
+INSERT INTO arbitro(id, first_name, last_name, code) VALUES (nextval('arbitro_seq'), 'Paolo', 'Valeri', 10003);
+
 -- GAMES (torneo_id=1) 
 -- Giornata 1 – tutte PLAYED
-INSERT INTO partita(id, date_time, place, goals_home, goals_away, status, torneo_id, home_team_id, away_team_id) VALUES (nextval('partita_seq'), '2026-03-07 15:00:00', 'Stadio Olimpico, Roma', 2, 1, 'PLAYED', 1, 1, 51);
-INSERT INTO partita(id, date_time, place, goals_home, goals_away, status, torneo_id, home_team_id, away_team_id) VALUES (nextval('partita_seq'), '2026-03-07 17:30:00', 'Arena Milano, Milano', 1, 1, 'PLAYED', 1, 51, 151);
-INSERT INTO partita(id, date_time, place, goals_home, goals_away, status, torneo_id, home_team_id, away_team_id) VALUES (nextval('partita_seq'), '2026-03-07 20:00:00', 'Stadio Maradona, Napoli', 0, 3, 'PLAYED', 1, 201, 251);
+INSERT INTO partita(id, date_time, place, goals_home, goals_away, status, torneo_id, home_team_id, away_team_id, arbitro_id) VALUES (nextval('partita_seq'), '2026-03-07 15:00:00', 'Stadio Olimpico, Roma', 2, 1, 'PLAYED', 1, 1, 51, 1);
+INSERT INTO partita(id, date_time, place, goals_home, goals_away, status, torneo_id, home_team_id, away_team_id, arbitro_id) VALUES (nextval('partita_seq'), '2026-03-07 17:30:00', 'Arena Milano, Milano', 1, 1, 'PLAYED', 1, 51, 151, 51);
+INSERT INTO partita(id, date_time, place, goals_home, goals_away, status, torneo_id, home_team_id, away_team_id, arbitro_id) VALUES (nextval('partita_seq'), '2026-03-07 20:00:00', 'Stadio Maradona, Napoli', 0, 3, 'PLAYED', 1, 201, 251, 101);
 
 -- Giornata 2 – tutte PLAYED
-INSERT INTO partita(id, date_time, place, goals_home, goals_away, status, torneo_id, home_team_id, away_team_id) VALUES (nextval('partita_seq'), '2026-03-14 15:00:00', 'Arena Milano, Milano', 2, 0, 'PLAYED', 1, 101, 1);
-INSERT INTO partita(id, date_time, place, goals_home, goals_away, status, torneo_id, home_team_id, away_team_id) VALUES (nextval('partita_seq'), '2026-03-14 17:30:00', 'Stadio Franchi, Firenze', 1, 2, 'PLAYED', 1, 251, 151);
-INSERT INTO partita(id, date_time, place, goals_home, goals_away, status, torneo_id, home_team_id, away_team_id) VALUES (nextval('partita_seq'), '2026-03-14 20:00:00', 'Stadio Olimpico, Roma', 0, 0, 'PLAYED', 1, 51, 201);
+INSERT INTO partita(id, date_time, place, goals_home, goals_away, status, torneo_id, home_team_id, away_team_id, arbitro_id) VALUES (nextval('partita_seq'), '2026-03-14 15:00:00', 'Arena Milano, Milano', 2, 0, 'PLAYED', 1, 101, 1, 51);
+INSERT INTO partita(id, date_time, place, goals_home, goals_away, status, torneo_id, home_team_id, away_team_id, arbitro_id) VALUES (nextval('partita_seq'), '2026-03-14 17:30:00', 'Stadio Franchi, Firenze', 1, 2, 'PLAYED', 1, 251, 151, 101);
+INSERT INTO partita(id, date_time, place, goals_home, goals_away, status, torneo_id, home_team_id, away_team_id, arbitro_id) VALUES (nextval('partita_seq'), '2026-03-14 20:00:00', 'Stadio Olimpico, Roma', 0, 0, 'PLAYED', 1, 51, 201, 1);
 
 -- Giornata 3 – una LIVE, due SCHEDULED
-INSERT INTO partita(id, date_time, place, goals_home, goals_away, status, torneo_id, home_team_id, away_team_id) VALUES (nextval('partita_seq'), '2026-03-21 15:00:00', 'Stadio Olimpico, Torino', 1, 0, 'LIVE', 1, 151, 1);
-INSERT INTO partita(id, date_time, place, goals_home, goals_away, status, torneo_id, home_team_id, away_team_id) VALUES (nextval('partita_seq'), '2026-03-21 17:30:00', 'Stadio Maradona, Napoli', NULL, NULL, 'SCHEDULED', 1, 201, 101);
-INSERT INTO partita(id, date_time, place, goals_home, goals_away, status, torneo_id, home_team_id, away_team_id) VALUES (nextval('partita_seq'), '2026-03-21 20:00:00', 'Stadio Franchi, Firenze', NULL, NULL, 'SCHEDULED', 1, 251, 51);
+INSERT INTO partita(id, date_time, place, goals_home, goals_away, status, torneo_id, home_team_id, away_team_id, arbitro_id) VALUES (nextval('partita_seq'), '2026-03-21 15:00:00', 'Stadio Olimpico, Torino', 1, 0, 'LIVE', 1, 151, 1, 101);
+INSERT INTO partita(id, date_time, place, goals_home, goals_away, status, torneo_id, home_team_id, away_team_id, arbitro_id) VALUES (nextval('partita_seq'), '2026-03-21 17:30:00', 'Stadio Maradona, Napoli', NULL, NULL, 'SCHEDULED', 1, 201, 101, 1);
+INSERT INTO partita(id, date_time, place, goals_home, goals_away, status, torneo_id, home_team_id, away_team_id, arbitro_id) VALUES (nextval('partita_seq'), '2026-03-21 20:00:00', 'Stadio Franchi, Firenze', NULL, NULL, 'SCHEDULED', 1, 251, 51, 51);
 
 -- Giornata 4 – tutte SCHEDULED
-INSERT INTO partita(id, date_time, place, goals_home, goals_away, status, torneo_id, home_team_id, away_team_id) VALUES (nextval('partita_seq'), '2026-03-28 15:00:00', 'Stadio Olimpico, Roma', NULL, NULL, 'SCHEDULED', 1, 1, 201);
-INSERT INTO partita(id, date_time, place, goals_home, goals_away, status, torneo_id, home_team_id, away_team_id) VALUES (nextval('partita_seq'), '2026-03-28 17:30:00', 'Arena Milano, Milano', NULL, NULL, 'SCHEDULED', 1, 101, 251);
-INSERT INTO partita(id, date_time, place, goals_home, goals_away, status, torneo_id, home_team_id, away_team_id) VALUES (nextval('partita_seq'), '2026-03-28 20:00:00', 'Stadio Olimpico, Torino', NULL, NULL, 'SCHEDULED', 1, 151, 51);
+INSERT INTO partita(id, date_time, place, goals_home, goals_away, status, torneo_id, home_team_id, away_team_id, arbitro_id) VALUES (nextval('partita_seq'), '2026-03-28 15:00:00', 'Stadio Olimpico, Roma', NULL, NULL, 'SCHEDULED', 1, 1, 201, 1);
+INSERT INTO partita(id, date_time, place, goals_home, goals_away, status, torneo_id, home_team_id, away_team_id, arbitro_id) VALUES (nextval('partita_seq'), '2026-03-28 17:30:00', 'Arena Milano, Milano', NULL, NULL, 'SCHEDULED', 1, 101, 251, 101);
+INSERT INTO partita(id, date_time, place, goals_home, goals_away, status, torneo_id, home_team_id, away_team_id, arbitro_id) VALUES (nextval('partita_seq'), '2026-03-28 20:00:00', 'Stadio Olimpico, Torino', NULL, NULL, 'SCHEDULED', 1, 151, 51, 51);
 
 -- GIOCATORI
 -- Roma Nord FC (squadra_id = 1)
@@ -88,3 +94,9 @@ INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, sq
 INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Bruno',     'Cattaneo',   '2007-04-22', 'Difensore',  1.79, 251);
 INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Dario',     'Rossi',      '2005-10-13', 'Centrocampista', 1.73, 251);
 INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Carlo',     'Benedetti',  '2006-05-04', 'Attaccante', 1.80, 251);
+
+-- GIOCATORI SVINCOLATI (senza squadra, squadra_id = NULL)
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Christian', 'Bianchi',    '2005-11-12', 'Portiere',   1.87, NULL);
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Fabio',     'Rizzo',      '2006-01-05', 'Difensore',  1.84, NULL);
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Edoardo',   'Moretti',    '2007-04-19', 'Centrocampista', 1.76, NULL);
+INSERT INTO giocatore(id, first_name, last_name, date_of_birth, role, height, squadra_id) VALUES (nextval('giocatore_seq'), 'Manuel',    'Ricci',      '2005-08-30', 'Attaccante', 1.81, NULL);

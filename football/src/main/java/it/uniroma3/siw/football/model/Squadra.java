@@ -1,8 +1,8 @@
 package it.uniroma3.siw.football.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,9 +24,9 @@ public class Squadra {
     @Column(nullable = false)
     private String city;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "squadre")
     private List<Torneo> tornei;
-    @OneToMany(mappedBy = "squadra", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "squadra")
     private List<Giocatore> giocatori;
 
     public Long getId() {
@@ -75,5 +75,20 @@ public class Squadra {
 
     public void setGiocatori(List<Giocatore> giocatori) {
         this.giocatori = giocatori;
+    }
+
+    public void addGiocatore(Giocatore giocatore) {
+        if (this.giocatori == null) {
+            this.giocatori = new ArrayList<>();
+        }
+        this.giocatori.add(giocatore);
+        giocatore.setSquadra(this); // Allinea il lato proprietario (FK)
+    }
+
+    public void removeGiocatore(Giocatore giocatore) {
+        if (this.giocatori != null) {
+            this.giocatori.remove(giocatore);
+            giocatore.setSquadra(null); // Imposta la FK a NULL sul database
+        }
     }
 }

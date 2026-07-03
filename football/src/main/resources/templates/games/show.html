@@ -20,10 +20,10 @@
 
             <p>
                 <strong>Risultato:</strong>
-                <span th:if="${game.status.name() == 'FINISHED' or game.status.name() == 'ONGOING'}"
+                <span th:if="${game.status.name() == 'PLAYED' or game.status.name() == 'LIVE'}"
                     th:text="${game.goalsHome + ' - ' + game.goalsAway}">0 - 0</span>
-                <span th:unless="${game.status.name() == 'FINISHED' or game.status.name() == 'ONGOING'}">
-                    Non ancora disputata
+                <span th:unless="${game.status.name() == 'PLAYED' or game.status.name() == 'LIVE'}">
+                    Non disputata
                 </span>
             </p>
 
@@ -51,7 +51,9 @@
 
             <p th:if="${game.arbitro != null}">
                 <strong>Arbitro:</strong>
-                <span th:text="${game.arbitro.name + ' ' + game.arbitro.surname}">Nome Arbitro</span>
+                <span
+                    th:text="${game.arbitro != null} ? (${game.arbitro.firstName} + ' ' + ${game.arbitro.lastName}) : 'Nessun arbitro assegnato'">Nome
+                    Arbitro</span>
             </p>
 
         </div>

@@ -22,18 +22,26 @@
         <div class="flex-container">
             <div class="card" th:each="p:${players}">
                 <h3 th:text="${p.firstName} + ' ' + ${p.lastName}">Mario Rossi</h3>
-                <p><strong>Data di nascita:</strong> <span th:text="${#temporals.format(p.dateOfBirth, 'dd/MM/yyyy')}">01/01/2001</span></p>
+                <p><strong>Data di nascita:</strong> <span
+                        th:text="${#temporals.format(p.dateOfBirth, 'dd/MM/yyyy')}">01/01/2001</span></p>
                 <p><strong>Altezza:</strong> <span th:text="${p.height}">1.75</span></p>
                 <p><strong>Ruolo:</strong> <span th:text="${p.role}">Centrocampista</span></p>
             </div>
         </div>
     </section>
 
-    <h2>
-        <div sec:authorize="hasAnyAuthority('ADMIN')">
-            <a th:href="@{/admin/teams/{id}/edit(id=${team.id})}">Modifica</a>
-        </div>
-    </h2>
+    <div sec:authorize="hasAuthority('ADMIN')">
+        <form th:action="@{/admin/teams/{id}/edit(id=${team.id})}" method="POST">
+            <button type="submit">Modifica</button>
+        </form>
+    </div>
+
+    <div sec:authorize="hasAuthority('ADMIN')">
+        <form th:action="@{/admin/teams/{id}/delete(id=${team.id})}" method="POST"
+            onsubmit="return confirm('Sei sicuro di voler eliminare questa squadra? I giocatori verranno svincolati.');">
+            <button type="submit" class="btn-cancella">Elimina</button>
+        </form>
+    </div>
 </body>
 
 </html>

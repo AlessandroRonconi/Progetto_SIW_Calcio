@@ -30,7 +30,7 @@ public class PartitaService {
     }
 
     @Transactional
-    public Partita save(Partita game) {
+    public void save(Partita game) {
         Long pId = game.getId();
         Long excludeId = pId != null ? pId : -1L;
         if (this.partitaRepository.existsByHomeTeamAndAwayTeamAndTorneoAndIdNot(
@@ -40,7 +40,7 @@ public class PartitaService {
                             + " del torneo " + game.getTorneo().getName() + " esiste già");
         }
         this.checkOrariConflict(game.getDateTime(), game.getPlace(), excludeId);
-        return this.partitaRepository.save(game);
+        this.partitaRepository.save(game);
     }
 
     private void checkOrariConflict(LocalDateTime dateTime, String place, Long excludeId) {
