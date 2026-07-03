@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Partite</title>
+    <link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+    <h1>Partite</h1>
+
+    <p>
+        <a th:href="@{/admin/games/new}">+ Aggiungi una partita</a>
+    </p>
+
+    <table th:if="${not #lists.isEmpty(games)}">
+        <thead>
+            <tr>
+                <th>Torneo</th>
+                <th>Casa</th>
+                <th>Trasferta</th>
+                <th>Data e ora</th>
+                <th>Posto</th>
+                <th>Risultato</th>
+                <th>Stato</th>
+                <th>Arbitro</th>
+                <th>Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="game : ${games}">
+                <td th:text="${game.torneo != null ? game.torneo.name : '-'}"></td>
+                <td th:text="${game.homeTeam != null ? game.homeTeam.name : '-'}"></td>
+                <td th:text="${game.awayTeam != null ? game.awayTeam.name : '-'}"></td>
+                <td th:text="${#temporals.format(game.dateTime, 'dd/MM/yyyy HH:mm')}"></td>
+                <td th:text="${game.place}"></td>
+                <td
+                    th:text="${(game.goalsHome != null and game.goalsAway != null) ? game.goalsHome + ' - ' + game.goalsAway : '-'}">
+                </td>
+                <td th:text="${game.status}"></td>
+                <td th:text="${game.arbitro != null ? (game.arbitro.firstName + ' ' + game.arbitro.lastName) : '-'}">
+                </td>
+                <td>
+                    <a th:href="@{/games/{id}(id=${game.id})}">Dettagli</a>
+                    |
+                    <a th:href="@{/admin/games/{id}/edit(id=${game.id})}">Modifica</a>
+                    |
+                    <form th:action="@{/admin/games/{id}/delete(id=${game.id})}" method="POST" style="display:inline"
+                        onsubmit="return confirm('Eliminare questa partita?');">
+                        <button type="submit">Elimina</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p th:if="${#lists.isEmpty(games)}">Nessuna partita presente.</p>
+</body>
+
+</html>

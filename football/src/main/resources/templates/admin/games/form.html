@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Partita</title>
+    <link rel="stylesheet" href="/css/stile.css" />
+</head>
+<body>
+    <h1 th:text="${game.id != null} ? 'Modifica partita' : 'Nuova partita'"></h1>
+
+    <p th:if="${globalError}" th:text="${globalError}" class="error-message"></p>
+
+    <form th:action="${game.id != null}
+        ? @{/admin/games/{id}/edit(id = ${game.id})}
+        : @{/admin/games/new}" method="POST" th:object="${game}">
+
+        <div>
+            Torneo:
+            <select name="torneoId">
+                <option value="">-- Seleziona un torneo --</option>
+                <option th:each="t : ${tournaments}" th:value="${t.id}" th:text="${t.name} + ' (' + ${t.year} + ')'"
+                    th:selected="${game.torneo != null and game.torneo.id == t.id}"></option>
+            </select>
+            <span th:if="${#fields.hasErrors('torneo')}" th:errors="*{torneo}" class="error-message"></span>
+        </div>
+
+        <div>
+            Squadra in casa:
+            <select name="homeTeamId">
+                <option value="">-- Seleziona una squadra --</option>
+                <option th:each="s : ${teams}" th:value="${s.id}" th:text="${s.name}"
+                    th:selected="${game.homeTeam != null and game.homeTeam.id == s.id}"></option>
+            </select>
+            <span th:if="${#fields.hasErrors('homeTeam')}" th:errors="*{homeTeam}" class="error-message"></span>
+        </div>
+
+        <div>
+            Squadra in trasferta:
+            <select name="awayTeamId">
+                <option value="">-- Seleziona una squadra --</option>
+                <option th:each="s : ${teams}" th:value="${s.id}" th:text="${s.name}"
+                    th:selected="${game.awayTeam != null and game.awayTeam.id == s.id}"></option>
+            </select>
+            <span th:if="${#fields.hasErrors('awayTeam')}" th:errors="*{awayTeam}" class="error-message"></span>
+        </div>
+
+        <div>
+            Arbitro:
+            <select name="arbitroId">
+                <option value="">-- Nessuno --</option>
+                <option th:each="a : ${arbitri}" th:value="${a.id}" th:text="${a.firstName} + ' ' + ${a.lastName}"
+                    th:selected="${game.arbitro != null and game.arbitro.id == a.id}"></option>
+            </select>
+        </div>
+
+        <div>
+            Posto: <input type="text" th:field="*{place}" />
+            <span th:if="${#fields.hasErrors('place')}" th:errors="*{place}" class="error-message"></span>
+        </div>
+
+        <div>
+            Data e ora: <input type="datetime-local" th:field="*{dateTime}" />
+            <span th:if="${#fields.hasErrors('dateTime')}" th:errors="*{dateTime}" class="error-message"></span>
+        </div>
+
+        <!-- risultato e stato: solo in modifica -->
+        <div th:if="${game.id != null}">
+            <div>
+                Gol casa: <input type="number" min="0" th:field="*{goalsHome}" />
+            </div>
+            <div>
+                Gol trasferta: <input type="number" min="0" th:field="*{goalsAway}" />
+            </div>
+            <div>
+                Stato:
+                <select th:field="*{status}">
+                    <option th:each="st : ${statuses}" th:value="${st}" th:text="${st}"></option>
+                </select>
+            </div>
+        </div>
+
+        <div>
+            <button type="submit">Salva</button>
+        </div>
+    </form>
+</body>
+</html>

@@ -5,9 +5,9 @@ INSERT INTO users(id, name, surname, email, username) VALUES (nextval('users_seq
 INSERT INTO credentials (id, username, password, role, user_id) VALUES(nextval('credentials_seq'), 'admin', '$2a$12$bVR84ATc7PW6ZHkjuXdlme9UI7OyYCsFkFDvCbr7hedaoxiqIU6xe', 'ADMIN', 1);
 
 -- TOURNAMENTS 
-INSERT INTO torneo(id, name, year, description) VALUES (nextval('torneo_seq'), 'Under 21', 2026, 'Torneo amatoriale per gli under 21.');
-INSERT INTO torneo(id, name, year, description) VALUES (nextval('torneo_seq'), 'Under 21', 2025, 'Torneo amatoriale per gli under 21.');
-INSERT INTO torneo(id, name, year, description) VALUES (nextval('torneo_seq'), 'Under 18', 2026, 'Torneo amatoriale per gli under 18.');
+INSERT INTO torneo(id, name, year, description) VALUES (nextval('torneo_seq'), 'Under 21 2026', 2026, 'Torneo amatoriale per gli under 21.');
+INSERT INTO torneo(id, name, year, description) VALUES (nextval('torneo_seq'), 'Under 21 2025', 2025, 'Torneo amatoriale per gli under 21.');
+INSERT INTO torneo(id, name, year, description) VALUES (nextval('torneo_seq'), 'Under 18 2026', 2026, 'Torneo amatoriale per gli under 18.');
 
 -- TEAMS 
 INSERT INTO squadra(id, name, city, year_of_foundation) VALUES (nextval('squadra_seq'), 'Roma Nord FC', 'Roma',    2005);

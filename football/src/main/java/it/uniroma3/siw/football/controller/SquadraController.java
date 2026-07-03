@@ -31,6 +31,7 @@ public class SquadraController {
     @GetMapping("/teams")
     public String getTeamsList(Model model) {
         model.addAttribute("teams", this.squadraService.findAll());
+        model.addAttribute("number", this.squadraService.count());
         return "/teams/list.html";
     }
 

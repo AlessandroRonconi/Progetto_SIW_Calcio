@@ -44,4 +44,8 @@ public class SquadraService {
         squadra.setCity(citta);
         this.save(squadra);
     }
+
+    public Long count() {
+        return this.squadraRepository.count();
+    }
 }

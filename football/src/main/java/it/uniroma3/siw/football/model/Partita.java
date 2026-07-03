@@ -3,6 +3,8 @@ package it.uniroma3.siw.football.model;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import it.uniroma3.siw.football.model.enums.PartitaStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,6 +24,7 @@ public class Partita {
     private Long id;
 
     @Column(name = "date_time", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime dateTime;
     @Column(nullable = false)
     private String place;
