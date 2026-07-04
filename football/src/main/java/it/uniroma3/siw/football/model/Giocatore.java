@@ -2,6 +2,8 @@ package it.uniroma3.siw.football.model;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,6 +22,7 @@ public class Giocatore {
     @Column(nullable = false)
     private String lastName;
     @Column(name = "date_of_birth", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
     @Column(nullable = false)
     private String role;

@@ -2,10 +2,12 @@ package it.uniroma3.siw.football.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.uniroma3.siw.football.exception.DuplicateTorneoException;
 import it.uniroma3.siw.football.exception.ResourceNotFoundException;
 import it.uniroma3.siw.football.model.RigaClassifica;
 import it.uniroma3.siw.football.model.Squadra;
@@ -15,6 +17,7 @@ import it.uniroma3.siw.football.repository.TorneoRepository;
 
 @Service
 public class TorneoService {
+
     private final PartitaRepository partitaRepository;
     private final TorneoRepository tournamentRepository;
 
@@ -32,6 +35,16 @@ public class TorneoService {
 
     @Transactional
     public Torneo save(Torneo tournament) {
+        Optional<Torneo> existing = this.tournamentRepository
+                .findByNameAndYear(tournament.getName(), tournament.getYear());
+
+        // Duplicato solo se esiste un ALTRO torneo con stesso nome e anno
+        // (non se è lo stesso che sto modificando)
+        if (existing.isPresent() && !existing.get().getId().equals(tournament.getId())) {
+            throw new DuplicateTorneoException(
+                    "Esiste già un torneo con lo stesso nome e anno.");
+        }
+
         return this.tournamentRepository.save(tournament);
     }
 
@@ -56,18 +69,11 @@ public class TorneoService {
         Torneo tournament = this.findById(tournamentId);
         if (tournament == null)
             return new ArrayList<>();
-
-        // Prende i team partecipanti
         List<Squadra> teams = tournament.getSquadre();
-
         List<RigaClassifica> righe = new ArrayList<>();
-
         for (Squadra team : teams) {
-            // Filtra solo i match giocati da questa squadra
             righe.add(new RigaClassifica(team, partitaRepository.findPlayedByTeam(team.getId())));
         }
-
-        // Ordina per Punti (e Differenza Reti come secondo criterio)
         righe.sort((r1, r2) -> {
             int res = Integer.compare(r2.getPoints(), r1.getPoints());
             if (res == 0) {
@@ -75,7 +81,6 @@ public class TorneoService {
             }
             return res;
         });
-
         return righe;
     }
 
@@ -87,5 +92,4 @@ public class TorneoService {
         torneo.setDescription(descrizione);
         this.save(torneo);
     }
-
 }

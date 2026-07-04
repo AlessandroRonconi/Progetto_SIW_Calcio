@@ -15,7 +15,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     public User getUser(Long id) {
         return this.userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Utente non trovato"));
     }

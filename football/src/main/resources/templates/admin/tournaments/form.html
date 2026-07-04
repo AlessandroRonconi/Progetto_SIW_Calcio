@@ -8,6 +8,7 @@
 
 <body>
     <h1>Aggiungi un torneo</h1>
+    <div class="error-banner" th:if="${errorMessage != null}" th:text="${errorMessage}"></div>
     <form th:action="${tournament.id != null} 
         ? @{/admin/tournaments/{id}/edit(id=${tournament.id})} 
         : @{/admin/tournaments/new}" method="POST" th:object="${tournament}">

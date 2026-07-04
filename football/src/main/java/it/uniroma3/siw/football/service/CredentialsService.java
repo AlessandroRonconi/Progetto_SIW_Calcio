@@ -3,6 +3,7 @@ package it.uniroma3.siw.football.service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import it.uniroma3.siw.football.exception.ResourceNotFoundException;
 import it.uniroma3.siw.football.model.Credentials;
 import it.uniroma3.siw.football.repository.CredentialsRepository;
 
@@ -18,7 +19,8 @@ public class CredentialsService {
     }
 
     public Credentials getCredentials(Long id) {
-        return this.credentialsRepository.findById(id).get();
+        return this.credentialsRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Credenziali non trovate."));
     }
 
     public Credentials getCredentials(String username) {

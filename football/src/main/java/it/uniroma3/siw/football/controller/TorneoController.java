@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import it.uniroma3.siw.football.exception.DuplicateTorneoException;
 import it.uniroma3.siw.football.model.Squadra;
 import it.uniroma3.siw.football.model.Torneo;
 import it.uniroma3.siw.football.service.PartitaService;
@@ -117,7 +118,14 @@ public class TorneoController {
             return "admin/tournaments/form";
         }
 
-        this.torneoService.save(tournament);
+        try {
+            this.torneoService.save(tournament);
+        } catch (DuplicateTorneoException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            model.addAttribute("teams", squadraService.findAll());
+            return "admin/tournaments/form";
+        }
+
         return "redirect:/tournaments";
     }
 
@@ -167,6 +175,14 @@ public class TorneoController {
         }
 
         if (bindingResult.hasErrors()) {
+            model.addAttribute("teams", squadraService.findAll());
+            return "admin/tournaments/form";
+        }
+
+        try {
+            this.torneoService.save(tournament);
+        } catch (DuplicateTorneoException e) {
+            model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("teams", squadraService.findAll());
             return "admin/tournaments/form";
         }
