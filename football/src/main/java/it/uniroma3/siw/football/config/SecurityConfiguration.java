@@ -1,4 +1,4 @@
-package it.uniroma3.siw.football.authentication;
+package it.uniroma3.siw.football.config;
 
 import javax.sql.DataSource;
 

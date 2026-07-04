@@ -7,45 +7,8 @@
 </head>
 
 <body>
-
-    <h1 th:text="'Calendario ' + ${tournament.year}">Calendario Anno</h1>
-
-    <p th:if="${#lists.isEmpty(games)}">Nessuna partita in programma.</p>
-
-    <table th:unless="${#lists.isEmpty(games)}">
-        <thead>
-            <tr>
-                <th>Data e ora</th>
-                <th>Casa</th>
-                <th>Risultato</th>
-                <th>Ospite</th>
-                <th>Luogo</th>
-                <th>Stato</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="game : ${games}">
-                <td th:text="${#temporals.format(game.dateTime, 'dd/MM/yyyy HH:mm')}">01/01/2024 20:45</td>
-                <td>
-                    <a th:href="@{/teams/{id}(id=${game.homeTeam.id})}" th:text="${game.homeTeam.name}">Casa</a>
-                </td>
-                <td>
-                    <span th:if="${game.status.name() == 'SCHEDULED'}">-</span>
-                    <span th:unless="${game.status.name() == 'SCHEDULED'}"
-                        th:text="${game.goalsHome} + ' - ' + ${game.goalsAway}">0 - 0</span>
-                </td>
-                <td>
-                    <a th:href="@{/teams/{id}(id=${game.awayTeam.id})}" th:text="${game.awayTeam.name}">Ospite</a>
-                </td>
-                <td th:text="${game.place}">Stadio</td>
-                <td th:text="${game.status}">SCHEDULED</td>
-                <td>
-                    <a th:href="@{/games/{id}(id=${game.id})}">Dettagli</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
+    <div id="root-calendar-page" th:attr="data-tournament-id=${tournament.id}"></div>
+    <script th:src="@{/react/assets/index.js}"></script>
 </body>
 
 </html>
