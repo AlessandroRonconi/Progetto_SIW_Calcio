@@ -19,12 +19,12 @@ INSERT INTO squadra(id, name, city, year_of_foundation) VALUES (nextval('squadra
 SELECT setval('squadra_seq', 252);
 
 -- TOURNAMENT-TEAM (torneo Under 21 2026, id=1) 
-INSERT INTO torneo_squadre(torneo_id, squadre_id) VALUES (1, 1);
-INSERT INTO torneo_squadre(torneo_id, squadre_id) VALUES (1, 51);
-INSERT INTO torneo_squadre(torneo_id, squadre_id) VALUES (1, 101);
-INSERT INTO torneo_squadre(torneo_id, squadre_id) VALUES (1, 151);
-INSERT INTO torneo_squadre(torneo_id, squadre_id) VALUES (1, 201);
-INSERT INTO torneo_squadre(torneo_id, squadre_id) VALUES (1, 251);
+INSERT INTO torneo_squadre(tornei_id, squadre_id) VALUES (1, 1);
+INSERT INTO torneo_squadre(tornei_id, squadre_id) VALUES (1, 51);
+INSERT INTO torneo_squadre(tornei_id, squadre_id) VALUES (1, 101);
+INSERT INTO torneo_squadre(tornei_id, squadre_id) VALUES (1, 151);
+INSERT INTO torneo_squadre(tornei_id, squadre_id) VALUES (1, 201);
+INSERT INTO torneo_squadre(tornei_id, squadre_id) VALUES (1, 251);
 
 -- ARBITRI
 INSERT INTO arbitro(id, first_name, last_name, code) VALUES (nextval('arbitro_seq'), 'Gianluca', 'Rocchi', 10001);

@@ -13,21 +13,26 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class Squadra {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @Column(nullable = false)
     private String name;
+
     @Column(name = "year_of_foundation", nullable = false)
     private Long yearOfFoundation;
+
     @Column(nullable = false)
     private String city;
 
     @ManyToMany(mappedBy = "squadre")
     private List<Torneo> tornei;
+
     @OneToMany(mappedBy = "squadra")
     private List<Giocatore> giocatori;
+
+    // getter e setter invariati...
 
     public Long getId() {
         return id;
@@ -82,13 +87,28 @@ public class Squadra {
             this.giocatori = new ArrayList<>();
         }
         this.giocatori.add(giocatore);
-        giocatore.setSquadra(this); // Allinea il lato proprietario (FK)
+        giocatore.setSquadra(this);
     }
 
     public void removeGiocatore(Giocatore giocatore) {
         if (this.giocatori != null) {
             this.giocatori.remove(giocatore);
-            giocatore.setSquadra(null); // Imposta la FK a NULL sul database
+            giocatore.setSquadra(null);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Squadra))
+            return false;
+        Squadra other = (Squadra) o;
+        return id != null && id.equals(other.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }
