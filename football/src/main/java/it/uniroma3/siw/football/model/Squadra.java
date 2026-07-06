@@ -10,6 +10,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Squadra {
@@ -18,12 +20,15 @@ public class Squadra {
     private Long id;
 
     @Column(nullable = false)
+    @NotBlank(message="Il nome della squadra è obbligatorio")
     private String name;
 
     @Column(name = "year_of_foundation", nullable = false)
+    @NotNull(message="L'anno di fondazione della squadra è obbligatorio")
     private Long yearOfFoundation;
 
     @Column(nullable = false)
+    @NotBlank(message="La città della squadra è obbligatoria")
     private String city;
 
     @ManyToMany(mappedBy = "squadre")
@@ -31,8 +36,6 @@ public class Squadra {
 
     @OneToMany(mappedBy = "squadra")
     private List<Giocatore> giocatori;
-
-    // getter e setter invariati...
 
     public Long getId() {
         return id;

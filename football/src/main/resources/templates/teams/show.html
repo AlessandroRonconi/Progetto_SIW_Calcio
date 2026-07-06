@@ -7,6 +7,9 @@
 </head>
 
 <body>
+    <h3>
+        <a href="/">Torna alla homepage</a>
+    </h3>
     <h1 th:text="${team.name}">Lamezia Terme FC</h1>
 
     <div>
@@ -31,9 +34,7 @@
     </section>
 
     <div sec:authorize="hasAuthority('ADMIN')">
-        <form th:action="@{/admin/teams/{id}/edit(id=${team.id})}" method="POST">
-            <button type="submit">Modifica</button>
-        </form>
+        <a th:href="@{/admin/teams/{id}/edit(id=${team.id})}">Modifica</a>
     </div>
 
     <div sec:authorize="hasAuthority('ADMIN')">

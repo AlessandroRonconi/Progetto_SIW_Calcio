@@ -22,7 +22,6 @@ INSERT INTO squadra(id, name, city, year_of_foundation) VALUES (nextval('squadra
 INSERT INTO squadra(id, name, city, year_of_foundation) VALUES (nextval('squadra_seq'), 'Pomezia Calcio', 'Pomezia', 2004);
 INSERT INTO squadra(id, name, city, year_of_foundation) VALUES (nextval('squadra_seq'), 'US Civitavecchia Giovanile', 'Civitavecchia', 2011);
 INSERT INTO squadra(id, name, city, year_of_foundation) VALUES (nextval('squadra_seq'), 'ASD Frosinone Giovani', 'Frosinone', 2012);
-SELECT setval('squadra_seq', 452);
 
 -- TOURNAMENT-TEAM
 INSERT INTO torneo_squadre(tornei_id, squadre_id) VALUES (1, 1);

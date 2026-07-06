@@ -5,6 +5,10 @@
     <link rel="stylesheet" href="/css/stile.css" />
 </head>
 <body>
+    <h3>
+        <a href="/">Torna alla homepage</a>
+    </h3>
+
     <h1 th:text="${game.id != null} ? 'Modifica partita' : 'Nuova partita'"></h1>
 
     <p th:if="${globalError}" th:text="${globalError}" class="error-message"></p>

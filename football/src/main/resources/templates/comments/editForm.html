@@ -7,6 +7,9 @@
 </head>
 
 <body>
+    <h3>
+        <a href="/">Torna alla homepage</a>
+    </h3>
 
     <h1>Modifica il commento</h1>
     <form th:action="@{'/games/' + ${gameId} + '/comments/' + ${comment.id} + '/edit'}" method="POST"

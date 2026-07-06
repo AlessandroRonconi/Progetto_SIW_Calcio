@@ -7,6 +7,9 @@
 </head>
 
 <body>
+    <h3>
+        <a href="/">Torna alla homepage</a>
+    </h3>
     <h1>Aggiungi un torneo</h1>
     <div class="error-banner" th:if="${errorMessage != null}" th:text="${errorMessage}"></div>
     <form th:action="${tournament.id != null} 

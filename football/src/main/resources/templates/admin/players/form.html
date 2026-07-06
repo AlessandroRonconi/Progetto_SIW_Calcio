@@ -8,6 +8,9 @@
 </head>
 
 <body>
+    <h3>
+        <a href="/">Torna alla homepage</a>
+    </h3>
 
     <h1 th:text="${player.id} != null ? 'Modifica giocatore' : 'Nuovo giocatore'"></h1>
     <div class="error-banner" th:if="${errorMessage != null}" th:text="${errorMessage}"></div>
@@ -36,8 +39,8 @@
         <span class="error-message" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></span>
         <br />
 
-        <label for="height">Altezza (cm)</label>
-        <input type="number" step="0.1" id="height" th:field="*{height}" />
+        <label for="height">Altezza (m)</label>
+        <input type="number" step="0.01" id="height" th:field="*{height}" />
         <span class="error-message" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></span>
         <br />
 
