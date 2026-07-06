@@ -51,7 +51,7 @@ public class PartitaService {
 
     @Transactional(readOnly = true)
     public List<Partita> gamesByTournament(Long tId) {
-        return partitaRepository.findByTournamentFetchTeams(tId);
+        return partitaRepository.findByTournamentFetchTeamsAndReferee(tId);
     }
 
     @Transactional

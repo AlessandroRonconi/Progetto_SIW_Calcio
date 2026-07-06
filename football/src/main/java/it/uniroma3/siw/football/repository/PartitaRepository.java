@@ -12,13 +12,15 @@ import it.uniroma3.siw.football.model.Squadra;
 import it.uniroma3.siw.football.model.Torneo;
 
 public interface PartitaRepository extends CrudRepository<Partita, Long> {
-    @Query("SELECT p FROM Partita p JOIN FETCH p.homeTeam JOIN FETCH p.awayTeam WHERE p.torneo.id = :id ORDER BY p.dateTime ASC")
-    List<Partita> findByTournamentFetchTeams(Long id);
+    @Query("SELECT p FROM Partita p LEFT JOIN FETCH p.homeTeam LEFT JOIN FETCH p.awayTeam LEFT JOIN FETCH p.arbitro JOIN FETCH p.torneo WHERE p.torneo.id = :id ORDER BY p.dateTime ASC")
+    List<Partita> findByTournamentFetchTeamsAndReferee(@Param("id") Long id);
 
-    @Query("SELECT p FROM Partita p JOIN FETCH p.homeTeam JOIN FETCH p.awayTeam WHERE p.status = 'PLAYED' AND (p.homeTeam.id = :teamId OR p.awayTeam.id = :teamId)")
+    List<Partita> findByTorneoIdOrderByDateTimeAsc(Long torneoId); //solo per i test sulle strategie di fetch
+
+    @Query("SELECT p FROM Partita p LEFT JOIN FETCH p.homeTeam LEFT JOIN FETCH p.awayTeam WHERE p.status = 'PLAYED' AND (p.homeTeam.id = :teamId OR p.awayTeam.id = :teamId)")
     List<Partita> findPlayedByTeam(@Param("teamId") Long teamId);
 
-    @Query("SELECT p FROM Partita p JOIN FETCH p.homeTeam JOIN FETCH p.awayTeam WHERE (p.homeTeam.id = :teamId OR p.awayTeam.id = :teamId)")
+    @Query("SELECT p FROM Partita p LEFT JOIN FETCH p.homeTeam LEFT JOIN FETCH p.awayTeam WHERE (p.homeTeam.id = :teamId OR p.awayTeam.id = :teamId)")
     List<Partita> findByTeam(@Param("teamId") Long teamId);
 
     boolean existsByHomeTeamAndAwayTeamAndTorneoAndIdNot(Squadra homeTeam, Squadra awayTeam, Torneo torneo, Long id);

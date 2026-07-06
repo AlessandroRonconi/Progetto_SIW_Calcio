@@ -40,10 +40,10 @@ public class SecurityConfiguration {
     protected SecurityFilterChain configure(final HttpSecurity httpSecurity) throws Exception {
 
         httpSecurity.authorizeHttpRequests(authorize -> {
-            authorize.requestMatchers(HttpMethod.GET, "/", "/index", "/register", "/login", "/css/**", "/error/**").permitAll();
+            authorize.requestMatchers(HttpMethod.GET, "/", "/index", "/register", "/login", "/css/**", "/error/**", "/react/**").permitAll();
             authorize.requestMatchers(HttpMethod.POST, "/register", "/login").permitAll();
 
-            authorize.requestMatchers(HttpMethod.GET, "/tournaments", "/tournaments/{id}", "/tournaments/{id}/participants", "/tournaments/{id}/calendar", "/tournaments/{id}/classification", "/games", "/games/{id}", "/players").permitAll();
+            authorize.requestMatchers(HttpMethod.GET, "/tournaments", "/tournaments/{id}", "/tournaments/{id}/participants", "/tournaments/{id}/calendar", "/rest/tournaments/{id}/calendar", "/tournaments/{id}/classification", "/games", "/games/{id}", "/players").permitAll();
             authorize.requestMatchers(HttpMethod.GET, "/teams", "/teams/{id}").permitAll();
 
             authorize.requestMatchers(HttpMethod.GET, "/games/{id}/comments/**").authenticated();
